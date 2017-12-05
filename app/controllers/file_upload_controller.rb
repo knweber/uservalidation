@@ -2,16 +2,12 @@ require 'sinatra'
 require 'csv'
 require 'date'
 
-get '/' do
-  redirect '/uploads/new'
-end
-
 get '/uploads' do
-  erb :index
+  erb :'uploads/index'
 end
 
 get '/uploads/new' do
-  erb :new
+  erb :'uploads/new'
 end
 
 post '/uploads' do
@@ -22,5 +18,5 @@ post '/uploads' do
   contents = CSV.parse(File.read(filename).scrub)
   verify_emails(contents)
   invalids = File.read('invalid_emails.txt')
-  erb :index, locals: { contents: invalids }
+  erb :'uploads/index', locals: { contents: invalids }
 end
