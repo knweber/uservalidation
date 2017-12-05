@@ -16,6 +16,7 @@ post '/uploads' do
 
   File.open(filename, "w+") { |f| f.write(tempfile.read) }
   contents = CSV.parse(File.read(filename).scrub)
+  contents.shift
   verify_emails(contents)
   invalids = File.read('invalid_emails.txt')
   erb :'uploads/index', locals: { contents: invalids }

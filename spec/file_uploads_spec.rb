@@ -14,13 +14,18 @@ describe 'File Upload Controller' do
 
   end
 
+# CHANGE CONTROLLER TO REDIRECT
   xcontext 'post /uploads route' do
-    it 'should give a status of 200 after submission' do
-      post '/uploads'
-      expect(last_response.status).to eq(200)
+    it 'should give a status of 302 after submission' do
+      expect(last_response.status).to eq(302)
     end
 
-    it 'should get /uploads after submission' do
+    it 'should display a form' do
+      get '/uploads/new'
+      expect(last_response.body).to include('<form id=\'upload-form\'')
+    end
+
+    it 'should redirect to /uploads after submission' do
       post '/uploads'
       expect(last_response.location).to include('/uploads')
     end
