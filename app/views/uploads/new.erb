@@ -3,7 +3,7 @@
   <%= erb :'_errors', locals: {errors: errors} %>
 <% end %>
 
-<form action="/uploads" enctype="multipart/form-data" method="post">
+<form id='upload-form' action="/uploads" enctype="multipart/form-data" method="post">
   <input name="file" type="file" />
   <input type="submit" value="Upload spreadsheet" />
 </form>
