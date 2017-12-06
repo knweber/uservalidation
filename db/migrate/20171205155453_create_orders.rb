@@ -9,6 +9,9 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :influencer_id
       t.integer :billing_address_id
       t.integer :shipping_address_id
+      t.index :influencer_id
+      t.index :send_receipt
+      t.index :send_fulfillment_receipt
       t.timestamps
     end
   end
