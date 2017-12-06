@@ -7,5 +7,7 @@ get '/orders/new' do
 end
 
 post '/orders' do
+  params[:order].inspect
+  p params[:order].inspect
   redirect '/orders'
 end
