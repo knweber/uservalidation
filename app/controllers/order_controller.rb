@@ -7,5 +7,7 @@ get '/orders/new' do
 end
 
 post '/orders' do
-  redirect '/orders'
+  params[:order].inspect
+  p params[:order].inspect
+  erb :'orders/index', locals: { params: params[:order] }
 end
