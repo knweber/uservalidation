@@ -8,7 +8,7 @@ helpers do
     invalid_users = []
     users.each do |user|
       email = user[7]
-      if !EmailValidator.valid?(email) || /gmaill/ =~ email || /example/ =~ email || /comm/ =~ email 
+      if !EmailValidator.valid?(email) || /gmaill/ =~ email || /example/ =~ email || /.comm/ =~ email 
         invalid_users.push("Name: " + user[0] + " " + user[1] + ", Invalid Email: " + user[7] + " \n")
       end
     end
