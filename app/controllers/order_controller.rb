@@ -9,5 +9,5 @@ end
 post '/orders' do
   params[:order].inspect
   p params[:order].inspect
-  redirect '/orders'
+  erb :'orders/index', locals: { params: params[:order] }
 end
