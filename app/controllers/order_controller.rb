@@ -7,7 +7,11 @@ get '/orders/new' do
 end
 
 post '/orders' do
-  params[:order].inspect
-  p params[:order].inspect
-  erb :'orders/index', locals: { params: params[:order] }
+  order_hash = {}
+  items = []
+  if(params[:order])
+    order_hash = params[:order]
+    items = order_hash.keys
+  end
+  erb :'orders/index', locals: { params: items }
 end
