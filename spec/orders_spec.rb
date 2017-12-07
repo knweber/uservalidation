@@ -15,15 +15,42 @@ describe 'Order Controller' do
   end
 
   context 'post /orders route' do
-    it 'should redirect after submission' do
-      post '/orders'
+    context 'valid order' do
+      it 'should redirect after submission' do
+        post '/orders'
+        expect(last_response.status).to eq(302)
+      end
+      it 'should redirect to /orders after submission' do
+        post '/orders'
+        expect(last_response.location).to include('/orders')
+      end
+    end
+
+    context 'invalid order' do
+      it 'should have a status of 422' do
+        post '/orders'
+        expect(last_response.status).to eq(422)
+      end
+
+      it 'should redirect to /orders/new after submission' do
+        post '/orders'
+        expect(last_response.location).to include('/orders/new')
+      end
+
+      it 'should include the error message' do
+      end
+
+    end
+
+    it 'should redirect if not logged in' do
       expect(last_response.status).to eq(302)
     end
 
-    it 'should redirect to /orders after submission' do
-      post '/orders'
-      expect(last_response.location).to include('/orders')
+    it 'should redirect to /sessions/new if not logged in' do
+      expect(last_response.location).to include('/sessions/new')
     end
+
+
   end
 
 end

@@ -1,9 +1,6 @@
 <h2>Upload CSV File of Influencers:</h2>
-<% if defined? errors %>
-  <%= erb :'_errors', locals: {errors: errors} %>
-<% end %>
 
 <form id='upload-form' action="/uploads" enctype="multipart/form-data" method="post">
   <input name="file" type="file" />
-  <input type="submit" value="Upload spreadsheet" />
+  <input class="submit-button" type="submit" value="Upload spreadsheet" />
 </form>

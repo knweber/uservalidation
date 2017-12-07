@@ -7,7 +7,17 @@ get '/orders/new' do
 end
 
 post '/orders' do
-  params[:order].inspect
-  p params[:order].inspect
-  erb :'orders/index', locals: { params: params[:order] }
+  order_hash = {}
+  items = []
+  if(params[:order])
+    order_hash = params[:order]
+    items = order_hash.keys
+    if(items.length == 3 || items.length == 5)
+      erb :'orders/index', locals: { items: items }
+    else
+      status 422
+      erb :'orders/new'
+    end
+  end
+
 end
