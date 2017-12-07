@@ -12,6 +12,12 @@ post '/orders' do
   if(params[:order])
     order_hash = params[:order]
     items = order_hash.keys
+    if(items.length == 3 || items.length == 5)
+      erb :'orders/index', locals: { items: items }
+    else
+      status 422
+      erb :'orders/new'
+    end
   end
-  erb :'orders/index', locals: { params: items }
+
 end
