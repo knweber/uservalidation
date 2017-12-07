@@ -1,6 +1,14 @@
-<h2>Selected Items:</h2>
-<ul>
-<% items.each do |item| %>
-  <li><%= item %></li>
-<% end %>
-</ul>
+<h3>Invalid User Information:</h3>
+  <% invalid_emails.split("\n").each do |person| %>
+    <p>
+      <%= person %>
+    </p>
+  <% end %>
+  <p></p>
+  <p></p>
+<h3>Selected Items:</h3>
+  <% items.each do |item| %>
+    <p>
+      <%= item %>
+    </p>
+  <% end %>

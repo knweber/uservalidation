@@ -7,17 +7,15 @@ get '/orders/new' do
 end
 
 post '/orders' do
-  order_hash = {}
-  items = []
-  if(params[:order])
-    order_hash = params[:order]
-    items = order_hash.keys
-    if(items.length == 3 || items.length == 5)
-      erb :'orders/index', locals: { items: items }
-    else
-      status 422
-      erb :'orders/new'
-    end
-  end
+  order_items = params[:order][:items].keys
+  customer_filename = params[:order][:customers][:filename]
+  tempfile = params[:order][:customers][:tempfile]
 
+  File.open(customer_filename, "w+") { |f| f.write(tempfile.read) }
+  customer_list = CSV.parse(File.read(customer_filename).scrub)
+  customer_list.shift
+  verify_emails(customer_list)
+  invalids = File.read('invalid_emails.txt')
+
+  erb :'orders/index', locals: { invalid_emails: invalids, items: order_items }
 end

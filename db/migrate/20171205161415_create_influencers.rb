@@ -13,10 +13,10 @@ class CreateInfluencers < ActiveRecord::Migration
       t.string :bra_size
       t.string :top_size
       t.string :bottom_size
+      t.string :sports_jacket_size
       t.boolean :three_item
       t.boolean :processed
       t.datetime :time_order_submitted
-      t.string :sports_jacket_size
       t.index :lastname
       t.index :email
       t.index :three_item
