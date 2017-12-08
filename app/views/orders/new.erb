@@ -1,28 +1,31 @@
-<h3>Select Items for Monthly Order:</h2>
-<p></p>
-<form id='order-form' action="/orders" enctype="multipart/form-data" method="post">
-  <p>
-    <input type = "checkbox" name = "order[items][leggings]">Leggings</input>
-  </p>
-  <p>
-    <input type = "checkbox" name = "order[items][sports-bra]">Sports Bra</input>
-  </p>
-  <p>
-    <input type = "checkbox" name = "order[items][sports-jacket]">Sports Jacket</input>
-  </p>
-  <p>
-    <input type = "checkbox" name = "order[items][tops]">Top</input>
-  </p>
-  <p>
-    <input type = "checkbox" name = "order[items][wrap]">Wrap</input>
-  </p>
+<div class = "new-order-form">
+  <h3 class="new-order-title"><strong>Select Items for Monthly Order:</strong></h3>
   <p></p>
-  <p></p>
-  <h3>Upload Influencers CSV</h3>
-  <p></p>
-  <p>
-    <input name="order[customers]" type="file" placeholder="Upload Influencer Spreadsheet"/>
-  </p>
-  <p></p>
-  <input class="submit-button" type="submit" value="Create Order" />
-</form>
+  <form id='order-form' class = "field" action="/orders" enctype="multipart/form-data" method="post">
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[items][leggings]">    Leggings</input>
+    </div>
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[items][sports-bra]">    Sports Bra</input>
+    </div>
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[items][sports-jacket]">   Sports Jacket</input>
+    </div>
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[items][tops]">    Top</input>
+    </div>
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[items][wrap]">    Wrap</input>
+    </div>
+    <br />
+    <h3><strong>Upload Influencers CSV</strong></h3>
+    <p></p>
+    <div class = "field">
+      <input name="order[customers]" type="file"/>
+    </div>
+    <br />
+    <p>
+    <input class="submit-button button is-light" type="submit" value="Create Order" />
+    </p>
+  </form>
+</div>

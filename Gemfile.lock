@@ -24,6 +24,7 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     email_validator (1.6.0)
       activemodel
     factory_girl (4.5.0)
@@ -62,6 +63,11 @@ GEM
       rack (>= 1.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    simplecov (0.14.1)
+      docile (~> 1.1.0)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.1)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -96,6 +102,7 @@ DEPENDENCIES
   rspec (~> 3.0)
   shotgun (~> 0.9.1)
   shoulda-matchers
+  simplecov
   sinatra (~> 1.0)
   sinatra-contrib
 

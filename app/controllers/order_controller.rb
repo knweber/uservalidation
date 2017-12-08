@@ -19,6 +19,6 @@ post '/orders' do
     invalids = File.read('invalid_emails.txt')
     erb :'orders/index', locals: { invalid_emails: invalids, items: order_items }
   else
-    erb: 'orders/index'
+    erb :'orders/index'
   end
 end

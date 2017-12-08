@@ -24,7 +24,7 @@ helpers do
       end
     end
   else
-    return;
+    return
   end
 
 end
