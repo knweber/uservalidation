@@ -15,7 +15,10 @@ post '/orders' do
   customer_list = CSV.parse(File.read(customer_filename).scrub)
   customer_list.shift
   verify_emails(customer_list)
-  invalids = File.read('invalid_emails.txt')
-
-  erb :'orders/index', locals: { invalid_emails: invalids, items: order_items }
+  if customer_list.length > 0
+    invalids = File.read('invalid_emails.txt')
+    erb :'orders/index', locals: { invalid_emails: invalids, items: order_items }
+  else
+    erb: 'orders/index'
+  end
 end
