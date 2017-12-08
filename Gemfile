@@ -20,6 +20,7 @@ group :test do
   gem 'rack-test'
   gem 'rspec', '~>3.0'
   gem 'capybara'
+  gem 'simplecov', :require => false, :group => :test
 end
 
 group :test, :development do
