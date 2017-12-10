@@ -1,0 +1,13 @@
+<% if defined? errors %>
+  <% errors.each do |message| %>
+  <p class="errors"> <%= message %> </p>
+  <% end %>
+<% end %>
+
+
+<!-- Which credentials should we require?
+<form class="session_form" action="/sessions" method="post">
+  <input type="text" name="email" placeholder="Email"/>
+  <input type="password" name="password" placeholder="Password"/>
+  <input type="submit" value="Login" class="button"/>
+</form> -->
