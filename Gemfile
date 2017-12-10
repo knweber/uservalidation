@@ -21,7 +21,7 @@ group :test do
   gem 'rack-test'
   gem 'rspec', '~>3.0'
   gem 'capybara'
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', :require => false
 end
 
 group :test, :development do
