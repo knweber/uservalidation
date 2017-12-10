@@ -1,3 +1,3 @@
 get '/' do
-  redirect '/uploads/new'
+  redirect '/sessions/new'
 end
