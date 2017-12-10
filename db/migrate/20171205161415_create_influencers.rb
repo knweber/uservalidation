@@ -17,12 +17,10 @@ class CreateInfluencers < ActiveRecord::Migration
       t.boolean :three_item
       t.boolean :processed
       t.datetime :time_order_submitted
+      
       t.index :lastname
       t.index :email
       t.index :three_item
-      # Are we making any assumptions about customers' addresses in the current (i.e. not this one) schema?
-      # t.integer :shipping_address_id
-      # t.integer :billing_address_id
     end
   end
 end
