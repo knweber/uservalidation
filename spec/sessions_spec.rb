@@ -12,12 +12,29 @@ decribe 'Sessions Controller' do
       get '/sessions/new'
       expect(last_response.body).to include('<form class=\'session_form\'')
     end
+
   end
 
-  context 'post /sessions' do
+  xcontext 'post /sessions' do
+    context 'valid user' do
+      it 'redirects to /orders/new' do
+      end
+    end
+
+    context 'invalid user' do
+      it 'redirects to /sessions/new' do
+      end
+
+      it 'gives errors if it gets invalid credentials' do
+      end
+
+      it 'gives a 422 if it gets invalid user info' do
+      end
+    end
+
   end
 
-  context 'delete /sessions/:id' do
+  xcontext 'delete /sessions/:id' do
     before(:each) do
       # post '/sessions' with valid user email
     end

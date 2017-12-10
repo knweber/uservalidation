@@ -43,7 +43,7 @@ describe 'Order Controller' do
 
   xcontext 'post /orders route' do
 
-    context 'valid order' do
+    context 'valid order and valid user' do
       it 'should redirect after submission' do
         post '/orders'
         expect(last_response.status).to eq(302)
@@ -55,7 +55,7 @@ describe 'Order Controller' do
       end
     end
 
-    context 'invalid order' do
+    context 'invalid order and valid user' do
       it 'should have a status of 422' do
         post '/orders'
         expect(last_response.status).to eq(422)
@@ -70,13 +70,16 @@ describe 'Order Controller' do
       end
     end
 
-    it 'should redirect if not logged in' do
-      expect(last_response.status).to eq(302)
+    context 'invalid user' do
+      it 'should redirect' do
+        expect(last_response.status).to eq(302)
+      end
+
+      it 'should redirect to /sessions/new ' do
+        expect(last_response.location).to include('/sessions/new')
+      end
     end
 
-    it 'should redirect to /sessions/new if not logged in' do
-      expect(last_response.location).to include('/sessions/new')
-    end
   end
 
 end
