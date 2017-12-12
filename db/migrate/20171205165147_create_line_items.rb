@@ -1,12 +1,13 @@
 class CreateLineItems < ActiveRecord::Migration
   def change
     create_table :line_items do |t|
-      t.integer :variant_id
-      t.integer :product_id
-      t.string :sku
-      t.integer :quantity
-      t.string :title
-      t.integer :order_id
+      t.string :name
+      t.integer :product_id, null:false
+      t.integer :variant_id, null:false
+      t.integer :quantity, null:false
+      t.string :sku, null:false
+      t.decimal :price, :precision => 5, :scale => 2
+      t.integer :order_id, null:false
     end
   end
 end
