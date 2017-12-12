@@ -1,28 +1,44 @@
 <div class = "new-order-form">
   <h3 class="new-order-title"><strong>Select Items for Monthly Order:</strong></h3>
   <p></p>
-  <form id='order-form' class = "field" action="/orders" enctype="multipart/form-data" method="post">
-    <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[items][leggings]">    Leggings</input>
-    </div>
-    <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[items][sports-bra]">    Sports Bra</input>
-    </div>
-    <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[items][sports-jacket]">   Sports Jacket</input>
-    </div>
-    <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[items][tops]">    Top</input>
-    </div>
-    <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[items][wrap]">    Wrap</input>
-    </div>
-    <br />
-    <h3><strong>Upload Influencers CSV</strong></h3>
-    <p></p>
-    <div class = "field">
-      <input name="order[customers]" type="file"/>
-    </div>
+  <form class='order-form field' action="/tickets" method="post">
+
+    <form class='order-form field' action="/orders" method="post">
+      <!-- <input type="hidden" name="ticket_id" value= <%= @ticket.id %> /> -->
+      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
+      <div class="field">
+        <input class="checkbox" type="checkbox" name="order[items][leggings]">    Leggings</input>
+      </div>
+    </form>
+
+    <form class='order-form field' action="/orders" method="post">
+      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
+      <div class = "field">
+        <input class = "checkbox" type = "checkbox" name = "order[items][sports-bra]">    Sports Bra</input>
+      </div>
+    </form>
+
+    <form class='order-form field' action="/orders" method="post">
+      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
+      <div class = "field">
+        <input class = "checkbox" type = "checkbox" name = "order[items][sports-jacket]">   Sports Jacket</input>
+      </div>
+    </form>
+
+    <form class='order-form field' action="/orders" method="post">
+      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
+      <div class = "field">
+        <input class = "checkbox" type = "checkbox" name = "order[items][tops]">    Top</input>
+      </div>
+    </form>
+
+    <form class='order-form field' action="/orders" method="post">
+      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
+      <div class = "field">
+        <input class = "checkbox" type = "checkbox" name = "order[items][wrap]">    Wrap</input>
+      </div>
+    </form>
+
     <br />
     <p>
     <input class="submit-button button is-light" type="submit" value="Create Order" />
