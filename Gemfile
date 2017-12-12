@@ -7,6 +7,8 @@ gem 'aws-sdk', '~> 2'
 # Sinatra driver
 gem 'sinatra', '~> 1.0'
 gem 'sinatra-contrib'
+gem 'sinatra-basic-auth'
+gem 'sinatra-support'
 
 gem 'activesupport', '~>4.2.0'
 gem 'activerecord', '~>4.2.0'

@@ -81,6 +81,8 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sinatra-basic-auth (0.1.0)
+      sinatra
     sinatra-contrib (1.4.2)
       backports (>= 2.0)
       multi_json
@@ -88,6 +90,8 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (~> 1.3)
+    sinatra-support (1.2.2)
+      sinatra (>= 1.0)
     thread_safe (0.3.4)
     tilt (1.4.1)
     tzinfo (1.2.2)
@@ -114,7 +118,9 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   sinatra (~> 1.0)
+  sinatra-basic-auth
   sinatra-contrib
+  sinatra-support
 
 BUNDLED WITH
    1.15.3
