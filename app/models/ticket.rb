@@ -1,3 +1,7 @@
 class Ticket < ActiveRecord::Base
-  # Remember to create a migration!
+
+  validates :order_number, presence:true
+
+  has_many :orders
+
 end
