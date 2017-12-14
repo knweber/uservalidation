@@ -6,14 +6,14 @@ class CreateInfluencers < ActiveRecord::Migration
       t.integer :shipping_address_id
       t.integer :billing_address_id
       t.string :email, null:false
-      t.string :phone, null:false
+      t.string :phone
       t.string :bra_size, null:false
       t.string :top_size, null:false
       t.string :bottom_size, null:false
       t.string :sports_jacket_size, null:false
-      t.boolean :three_item, null:false
+      t.string :three_item, null:false
 
-      t.index :lastname
+      t.index :last_name
       t.index :email
       t.index :three_item
     end

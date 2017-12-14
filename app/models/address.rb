@@ -8,7 +8,7 @@ class Address < ActiveRecord::Base
   validates :state, presence: true
   validates :postal_code, presence: true
   validates :country, presence: true
-  validates :influencer_id, presence: true
+  #validates :influencer_id, presence: true
 
   belongs_to :addressable, :polymorphic => true
   belongs_to :user

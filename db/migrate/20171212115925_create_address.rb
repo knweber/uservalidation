@@ -13,5 +13,6 @@ class CreateAddress < ActiveRecord::Migration
 
       t.integer :influencer_id, null:false
       t.timestamps
+    end
   end
 end

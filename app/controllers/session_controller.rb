@@ -1,8 +1,8 @@
-enable :sessions
-
-get '/sessions/new' do
-  erb :'sessions/new'
-end
+# enable :sessions
+#
+# get '/sessions/new' do
+#   erb :'sessions/new'
+# end
 
 # post '/sessions' do
   # --authenticate user (but which records?)--
@@ -15,7 +15,7 @@ end
   # end
 # end
 
-delete '/sessions/:id' do
-  sessions[:user_id] = nil
-  redirect '/'
-end
+# delete '/sessions/:id' do
+#   sessions[:user_id] = nil
+#   redirect '/'
+# end
