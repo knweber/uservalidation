@@ -2,9 +2,7 @@
   <h3 class="new-order-title"><strong>Select Items for Monthly Order:</strong></h3>
   <p></p>
 
-  <form class='order-form field' action="/orders" method="post">
-
-    <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
+  <form class='order-form field' action="/influencers/ <% @influencer.id %>/orders" method="post">
 
     <div class="field">
       <input class="checkbox" type="checkbox" name="order[leggings]">    Leggings</input>
