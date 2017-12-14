@@ -1,16 +1,18 @@
-get '/orders' do
-  # if session[:user_id] != nil
-  #   erb :'orders/index'
-  # else
-  #   redirect '/sessions/new'
-  # end
+get '/influencers/:influencer_id/orders/new' do
+  @influencer = Influencer.find(params[:influencer_id])
+  erb :'orders/new'
 end
 
-get '/orders/new' do
+get '/influencers/:influencer_id/orders/:id' do
+  @order = Order.find(params[:id])
+  @influencer = Influencer.find(@order.influencer_id)
+  erb :'orders/show'
+end
 
-  # if session[:user_id] != nil
-    erb :'orders/new'
-  # else
-  #   redirect '/sessions/new'
-  # end
+post '/influencers/:influencer_id/orders' do
+  order_params = params[:order]
+
+  @order = Order.create(order_params)
+
+  redirect "/influencers/#{@order.influencer_id}/orders/#{@order.id}"
 end

@@ -1,0 +1,42 @@
+<h3>Influencer: </h3>
+<%= @influencer.first_name %> <%= @influencer.last_name %>, <%= @influencer.id %>
+
+<br />
+<br />
+
+<h3>Order Items: </h3>
+<br />
+<p></p>
+<div>
+
+  <% if @order.leggings %>
+    <p>
+      Leggings, Size: <%= @influencer.bottom_size %>
+    </p>
+  <% end %>
+
+  <% if @order.sports_bra %>
+    <p>
+      Sports Bra, Size: <%= @influencer.bra_size %>
+    </p>
+  <% end %>
+
+  <% if @order.sports_jacket %>
+    <p>
+      Sports Jacket, Size: <%= @influencer.sports_jacket_size %>
+    </p>
+  <% end %>
+
+  <% if @order.top %>
+    <p>
+      Top, Size: <%= @influencer.top_size %>
+    </p>
+  <% end %>
+
+  <% if @order.wrap %>
+    <p>
+      Wrap, One Size
+    </p>
+  <% end %>
+
+</div>

@@ -1,47 +1,32 @@
 <div class = "new-order-form">
   <h3 class="new-order-title"><strong>Select Items for Monthly Order:</strong></h3>
   <p></p>
-  <form class='order-form field' action="/tickets" method="post">
 
-    <form class='order-form field' action="/orders" method="post">
-      <!-- <input type="hidden" name="ticket_id" value= <%= @ticket.id %> /> -->
-      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
-      <div class="field">
-        <input class="checkbox" type="checkbox" name="order[items][leggings]">    Leggings</input>
-      </div>
-    </form>
+  <form class='order-form field' action="/influencers/<%= @influencer.id %>/orders" method="post">
 
-    <form class='order-form field' action="/orders" method="post">
-      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
-      <div class = "field">
-        <input class = "checkbox" type = "checkbox" name = "order[items][sports-bra]">    Sports Bra</input>
-      </div>
-    </form>
+    <input type="hidden" name="order[influencer_id]" value="<%= @influencer.id %>" />
 
-    <form class='order-form field' action="/orders" method="post">
-      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
-      <div class = "field">
-        <input class = "checkbox" type = "checkbox" name = "order[items][sports-jacket]">   Sports Jacket</input>
-      </div>
-    </form>
+    <div class="field">
+      <input class="checkbox" type="checkbox" name="order[leggings]">    Leggings</input>
+    </div>
 
-    <form class='order-form field' action="/orders" method="post">
-      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
-      <div class = "field">
-        <input class = "checkbox" type = "checkbox" name = "order[items][tops]">    Top</input>
-      </div>
-    </form>
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[sports_bra]">    Sports Bra</input>
+    </div>
 
-    <form class='order-form field' action="/orders" method="post">
-      <input type="hidden" name="influencer_id" value= <%= @influencer.id %> />
-      <div class = "field">
-        <input class = "checkbox" type = "checkbox" name = "order[items][wrap]">    Wrap</input>
-      </div>
-    </form>
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[sports_jacket]">   Sports Jacket</input>
+    </div>
 
-    <br />
-    <p>
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[top]">    Top</input>
+    </div>
+
+    <div class = "field">
+      <input class = "checkbox" type = "checkbox" name = "order[wrap]">    Wrap</input>
+    </div>
+
     <input class="submit-button button is-light" type="submit" value="Create Order" />
-    </p>
+
   </form>
 </div>

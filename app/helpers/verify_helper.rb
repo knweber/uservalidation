@@ -15,13 +15,13 @@ helpers do
       else
 
         influencer = Influencer.new(
-          "first_name": user[0],
-          "last_name": user[1],
-          "email": user[7],
-          "phone": user[8],
-          "bra_size": user[9],
-          "top_size": user[10],
-          "bottom_size": user[11], "sports_jacket_size": user[12], "three_item": user[13])
+          first_name: user[0],
+          last_name: user[1],
+          email: user[7],
+          phone: user[8],
+          bra_size: user[9],
+          top_size: user[10],
+          bottom_size: user[11], sports_jacket_size: user[12], three_item: user[13])
 
 
         influencer.save!
