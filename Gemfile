@@ -2,10 +2,13 @@ source 'https://rubygems.org'
 
 # PostgreSQL driver
 gem 'pg'
+gem 'aws-sdk', '~> 2'
 
 # Sinatra driver
 gem 'sinatra', '~> 1.0'
 gem 'sinatra-contrib'
+gem 'sinatra-basic-auth'
+gem 'sinatra-support'
 
 gem 'activesupport', '~>4.2.0'
 gem 'activerecord', '~>4.2.0'
@@ -20,7 +23,7 @@ group :test do
   gem 'rack-test'
   gem 'rspec', '~>3.0'
   gem 'capybara'
-  gem 'simplecov', :require => false, :group => :test
+  gem 'simplecov', :require => false
 end
 
 group :test, :development do

@@ -1,24 +1,19 @@
 class CreateInfluencers < ActiveRecord::Migration
   def change
     create_table :influencers do |t|
-      t.string :first_name
-      t.string :last_name
-      t.string :address1
-      t.string :address2
-      t.string :city
-      t.string :state
-      t.string :zip
-      t.string :email
+      t.string :first_name, null:false
+      t.string :last_name, null:false
+      t.integer :shipping_address_id
+      t.integer :billing_address_id
+      t.string :email, null:false
       t.string :phone
-      t.string :bra_size
-      t.string :top_size
-      t.string :bottom_size
-      t.string :sports_jacket_size
-      t.boolean :three_item
-      t.boolean :processed
-      t.datetime :time_order_submitted
-      
-      t.index :lastname
+      t.string :bra_size, null:false
+      t.string :top_size, null:false
+      t.string :bottom_size, null:false
+      t.string :sports_jacket_size, null:false
+      t.string :three_item, null:false
+
+      t.index :last_name
       t.index :email
       t.index :three_item
     end
