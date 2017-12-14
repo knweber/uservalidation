@@ -12,6 +12,6 @@
 <h2>Influencers:</h2>
   <% @influencers.each do |influencer| %>
     <p>
-      <a href="/influencers/<% influencer.id %>/orders/new"> <%= influencer.first_name %></a>
+      <a href="/influencers/<%= influencer.id %>/orders/new"><%= influencer.first_name %></a>
     </p>
   <% end %>

@@ -31,6 +31,8 @@ post '/files' do
     p Influencer.first
 
     @influencers = Influencer.all
+    p "||||||||||||"
+    p "||||||||||||"
 
     erb :'files/index', locals: { invalid_emails: invalids }
 

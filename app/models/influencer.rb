@@ -16,6 +16,6 @@ class Influencer < ActiveRecord::Base
 
   has_one :shipping_address, :as => :addressable
 
-  has_many :orders
+  has_one :order
 
 end

@@ -11,7 +11,8 @@ end
 
 post '/influencers/:influencer_id/orders' do
   order_params = params[:order]
-  order = Order.create(order_params)
 
-  redirect '/influencers/#{params[:influencer_id]}/orders/#{params[:id]}'
+  @order = Order.create(order_params)
+
+  redirect "/influencers/#{@order.influencer_id}/orders/#{@order.id}"
 end
