@@ -19,7 +19,7 @@ helpers do
         invalid_users.push("Name: " + user[0] + " " + user[1] + ", Invalid Email: " + user[7] + " \n")
 
       else
-        if !Influencer.find_by('email',email)
+        if !Influencer.find_by(email: email)
           influencer = Influencer.new(
             first_name: user[0],
             last_name: user[1],
@@ -51,7 +51,7 @@ helpers do
           Email: #{influencer.email},
           Three-item: #{influencer.three_item}"
         end
-        
+
       end
     end
 

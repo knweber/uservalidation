@@ -20,7 +20,7 @@ get '/monthly_orders/:id' do
   monthly_order_items = []
 
   @monthly_order.attributes.each do |attr_name, attr_value|
-    if attr_value == true && attr_name != :three_item
+    if attr_value == true && attr_name != 'three_item'
       monthly_order_items.push(items[attr_name])
     end
   end

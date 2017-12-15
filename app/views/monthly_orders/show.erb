@@ -2,35 +2,9 @@
 <br />
 <p></p>
 <div>
-
-  <% if @monthly_order.leggings %>
-    <p>
-      Leggings
-    </p>
-  <% end %>
-
-  <% if @order.sports_bra %>
-    <p>
-      Sports Bra, Size: <%= @influencer.bra_size %>
-    </p>
-  <% end %>
-
-  <% if @order.sports_jacket %>
-    <p>
-      Sports Jacket, Size: <%= @influencer.sports_jacket_size %>
-    </p>
-  <% end %>
-
-  <% if @order.top %>
-    <p>
-      Top, Size: <%= @influencer.top_size %>
-    </p>
-  <% end %>
-
-  <% if @order.wrap %>
-    <p>
-      Wrap, One Size
-    </p>
-  <% end %>
-
+  <ul>
+    <% items.each do |item| %>
+      <li> <%= item %> </li>
+    <% end %>
+  <ul>
 </div>
