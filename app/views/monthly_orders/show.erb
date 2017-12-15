@@ -1,17 +1,11 @@
-<h3>Influencer: </h3>
-<%= @influencer.first_name %> <%= @influencer.last_name %>, <%= @influencer.id %>
-
-<br />
-<br />
-
 <h3>Order Items: </h3>
 <br />
 <p></p>
 <div>
 
-  <% if @order.leggings %>
+  <% if @monthly_order.leggings %>
     <p>
-      Leggings, Size: <%= @influencer.bottom_size %>
+      Leggings
     </p>
   <% end %>
 

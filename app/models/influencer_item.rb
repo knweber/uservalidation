@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Monthly_Order < ActiveRecord::Base
 
   validates :influencer_id, presence:true
 

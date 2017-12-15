@@ -1,9 +1,9 @@
-get '/upload/new' do
+get '/uploads/new' do
   # Erase invalid user information from .txt file when uploading a new form
-  File.open('../invalid_emails.txt','w') do |f|
+  File.open('invalid_emails.txt','w') do |f|
     f.truncate(0)
   end
-  erb :'files/new'
+  erb :'uploads/new'
 end
 
 
@@ -19,6 +19,6 @@ post '/uploads' do
 
     @influencers = Influencer.all
 
-    erb :'upload/index', locals: { invalid_emails: invalids }
+    erb :'uploads/index', locals: { invalid_emails: invalids }
 
 end

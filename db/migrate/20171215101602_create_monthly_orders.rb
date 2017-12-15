@@ -1,6 +1,6 @@
 class CreateMonthlyOrders < ActiveRecord::Migration
   def change
-    create_table :orders do |t|
+    create_table :monthly_orders do |t|
 
       t.boolean :leggings, :default => false
       t.boolean :sports_bra, :default => false
