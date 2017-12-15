@@ -12,27 +12,21 @@ get '/files/new' do
 end
 
 post '/files' do
-  # if session[:user_id] != nil
-    p '*********************'
 
-    customer_filename = params[:file][:filename]
+    influencers_info = params[:file][:filename]
     tempfile = params[:file][:tempfile]
 
-    File.open(customer_filename, "w+") { |f| f.write(tempfile.read) }
+    File.open(influencers_info, "w+") { |f| f.write(tempfile.read) }
 
-    customer_list = CSV.parse(File.read(customer_filename).scrub)
+    influencer_list = CSV.parse(File.read(influencers_info).scrub)
 
-    customer_list.shift
+    influencer_list.shift
 
-    verify_emails(customer_list)
+    verify_emails(influencer_list)
 
     invalids = File.read('invalid_emails.txt')
 
-    p Influencer.first
-
     @influencers = Influencer.all
-    p "||||||||||||"
-    p "||||||||||||"
 
     erb :'files/index', locals: { invalid_emails: invalids }
 
