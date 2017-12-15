@@ -4,8 +4,13 @@ require 'email_validator'
 
 helpers do
 
+
+# Checks all user info, writes invalid users to
+# invalid_emails.txt and creates new influencers in DB for valid users
+
   def verify_emails(users)
     invalid_users = []
+
     users.each do |user|
       email = user[7]
       if !EmailValidator.valid?(email) || /gmaill/ =~ email || /example/ =~ email || /.comm/ =~ email
@@ -21,16 +26,24 @@ helpers do
           phone: user[8],
           bra_size: user[9],
           top_size: user[10],
-          bottom_size: user[11], sports_jacket_size: user[12], three_item: user[13])
+          bottom_size: user[11],
+          sports_jacket_size: user[12],
+          three_item: user[13])
 
+          if three_item.downcase == "yes" || three_item.downcase == "y"
+            three_item = true
+          else
+            three_item = false
+          end
 
         influencer.save!
 
-        puts "influencer created! #{influencer.first_name}, #{influencer.id}"
+        puts "influencer created! #{influencer.first_name}, #{influencer.id}, three-item: #{influencer.three_item}"
 
       end
     end
 
+    # If there are users with invalid information
     if invalid_users.length > 0
       File.open('invalid_emails.txt','a+') do |file|
         file.write(DateTime.now)
