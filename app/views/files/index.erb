@@ -6,12 +6,46 @@
       </p>
     <% end %>
   <p></p>
+  <hr>
 <% end %>
-<hr>
 
 <h2>Influencers:</h2>
-  <% @influencers.each do |influencer| %>
+<p>
+  Count: <%= Influencer.count %>
+</p>
+
+<p>
+  <strong>Three-Item:</strong>
+</p>
+<p>
+  <form method="get" action="/orders/new/3-item">
+    <input type="button" value="Select Items for Order">
+  </form>
+</p>
+
+<% @influencers.each do |influencer| %>
+  <% if influencer.three_item == true %>
     <p>
-      <a href="/influencers/<%= influencer.id %>/orders/new"><%= influencer.first_name %></a>
+      <%= influencer.first_name + " " + influencer.last_name %>
     </p>
   <% end %>
+<% end %>
+
+<hr>
+
+<p>
+  <strong>Five-Item:</strong>
+</p>
+<p>
+  <form method="get" action="/orders/new/5-item">
+    <input type="button" value="Select Items for Order">
+  </form>
+</p>
+
+<% @influencers.each do |influencer| %>
+  <% if influencer.three_item == false %>
+    <p>
+      <%= influencer.first_name + " " + influencer.last_name %>
+    </p>
+  <% end %>
+<% end %>

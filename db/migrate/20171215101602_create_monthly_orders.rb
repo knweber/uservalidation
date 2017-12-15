@@ -1,4 +1,4 @@
-class CreateOrders < ActiveRecord::Migration
+class CreateMonthlyOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
 
@@ -8,9 +8,6 @@ class CreateOrders < ActiveRecord::Migration
       t.boolean :top, :default => false
       t.boolean :wrap, :default => false
       t.boolean :three_item, :default => false
-
-      t.integer :ticket_id
-      t.integer :influencer_id
 
     end
   end

@@ -3,8 +3,11 @@ class CreateInfluencers < ActiveRecord::Migration
     create_table :influencers do |t|
       t.string :first_name, null:false
       t.string :last_name, null:false
-      t.integer :shipping_address_id
-      t.integer :billing_address_id
+      t.string :address1, null:false
+      t.string :address2
+      t.string :city, null:false
+      t.string :state, null:false
+      t.string :zip, null:false
       t.string :email, null:false
       t.string :phone
       t.string :bra_size, null:false
