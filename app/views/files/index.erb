@@ -1,5 +1,7 @@
+<h2>Uploaded File:</h2>
+<br />
 <% if invalid_emails.length > 0 %>
-  <h3>Invalid User Information:</h3>
+  <h3>Invalid Records:</h3>
     <% invalid_emails.split("\n").each do |person| %>
       <p>
         <%= person %>
@@ -9,43 +11,46 @@
   <hr>
 <% end %>
 
-<h2>Influencers:</h2>
+<h3>Influencers:</h3>
 <p>
   Count: <%= Influencer.count %>
 </p>
 
-<p>
-  <strong>Three-Item:</strong>
-</p>
-<p>
-  <form method="get" action="/orders/new/3-item">
-    <input type="button" value="Select Items for Order">
-  </form>
-</p>
+<div class="three-item-influencers">
+  <p>
+    <strong>Three-Item:</strong>
+  </p>
+  <p>
+    <form method="get" action="/orders/new/3-item">
+      <input type="button" value="Select Items for Order">
+    </form>
+  </p>
 
-<% @influencers.each do |influencer| %>
-  <% if influencer.three_item == true %>
-    <p>
-      <%= influencer.first_name + " " + influencer.last_name %>
-    </p>
+  <% @influencers.each do |influencer| %>
+    <% if influencer.three_item == true %>
+      <p>
+        <%= influencer.first_name + " " + influencer.last_name %>
+      </p>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <hr>
+<div class="five-item-influencers">
+  <p>
+    <strong>Five-Item:</strong>
+  </p>
+  <p>
+    <form method="get" action="/orders/new/5-item">
+      <input type="button" value="Select Items for Order">
+    </form>
+  </p>
 
-<p>
-  <strong>Five-Item:</strong>
-</p>
-<p>
-  <form method="get" action="/orders/new/5-item">
-    <input type="button" value="Select Items for Order">
-  </form>
-</p>
-
-<% @influencers.each do |influencer| %>
-  <% if influencer.three_item == false %>
-    <p>
-      <%= influencer.first_name + " " + influencer.last_name %>
-    </p>
+  <% @influencers.each do |influencer| %>
+    <% if influencer.three_item == false %>
+      <p>
+        <%= influencer.first_name + " " + influencer.last_name %>
+      </p>
+    <% end %>
   <% end %>
-<% end %>
+</div>
