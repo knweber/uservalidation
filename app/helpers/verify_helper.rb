@@ -21,14 +21,15 @@ helpers do
 
     if invalid_users.length > 0
       File.open('invalid_emails.txt','a+') do |file|
+        file.truncate(0) # remove existing records
         file.write(DateTime.now)
         file.write("\n")
         invalid_users.each do |user|
           file.write(user)
           file.write("\n")
-          return false
         end
       end
+      return false
     else
       return true
     end

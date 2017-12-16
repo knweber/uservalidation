@@ -1,9 +1,17 @@
 get '/monthly_orders/new/3-item' do
-  erb :'monthly_orders/new3'
+  if Influencer.count != 0
+    erb :'monthly_orders/new3'
+  else
+    redirect '/uploads/new'
+  end
 end
 
 get '/monthly_orders/new/5-item' do
-  erb :'monthly_orders/new5'
+  if Influencer.count != 0
+    erb :'monthly_orders/new5'
+  else
+    redirect '/uploads/new'
+  end
 end
 
 get '/monthly_orders/:id' do

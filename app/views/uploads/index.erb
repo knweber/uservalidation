@@ -1,15 +1,5 @@
 <h2>Uploaded File:</h2>
 <br />
-<% if invalid_emails.length > 0 %>
-  <h3>Invalid Records:</h3>
-    <% invalid_emails.split("\n").each do |person| %>
-      <p>
-        <%= person %>
-      </p>
-    <% end %>
-  <p></p>
-  <hr>
-<% end %>
 
 <h3>Influencers:</h3>
 <p>
@@ -21,7 +11,7 @@
     <strong>Three-Item:</strong>
   </p>
   <p>
-    <form method="get" action="/orders/new/3-item">
+    <form method="get" action="/monthly_orders/new/3-item">
       <input type="button" value="Select Items for Order">
     </form>
   </p>
@@ -41,7 +31,7 @@
     <strong>Five-Item:</strong>
   </p>
   <p>
-    <form method="get" action="/orders/new/5-item">
+    <form method="get" action="/monthly_orders/new/5-item">
       <input type="button" value="Select Items for Order">
     </form>
   </p>
