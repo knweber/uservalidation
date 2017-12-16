@@ -7,6 +7,7 @@ class CreateInfluencerItems < ActiveRecord::Migration
       t.integer :product_id
       t.integer :variant_id
       t.integer :influencer_id
+      t.integer :ticket_id
     end
   end
 end

@@ -1,8 +1,8 @@
-class Monthly_Order < ActiveRecord::Base
+class InfluencerItem < ActiveRecord::Base
 
   validates :influencer_id, presence:true
 
   belongs_to :influencer
-  # belongs_to :ticket
+  belongs_to :ticket
 
 end

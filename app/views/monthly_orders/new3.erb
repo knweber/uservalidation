@@ -1,30 +1,38 @@
 <h3 class="new-order-title"><strong>Select Items for Three-Pack:</strong></h3>
 
-  <form class='order-form field' action="/orders" method="post">
+  <form class='monthly-order-form field' action="/orders" method="post">
 
-    <input type="hidden" name="order[three_item]" value=true />
+    <input type="hidden" name="monthly_order[three_item]" value=true />
 
     <div class="field">
-      <input class="checkbox" type="checkbox" name="order[leggings]">    Leggings</input>
+      <input type="text" name="monthly_order[name]" placeholder="Collection Name" />
+    </div>
+
+    <div class="field">
+      <input class="checkbox" type="checkbox" name="monthly_order[leggings]">    Leggings</input>
+    </div>
+
+    <div class="field">
+      <input class="checkbox" type="checkbox" name="monthly_order[leggings]">    Leggings</input>
     </div>
 
     <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[sports_bra]">    Sports Bra</input>
+      <input class = "checkbox" type = "checkbox" name = "monthly_order[sports_bra]">    Sports Bra</input>
     </div>
 
     <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[sports_jacket]">   Sports Jacket</input>
+      <input class = "checkbox" type = "checkbox" name = "monthly_order[sports_jacket]">   Sports Jacket</input>
     </div>
 
     <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[top]">    Top</input>
+      <input class = "checkbox" type = "checkbox" name = "monthly_order[top]">    Top</input>
     </div>
 
     <div class = "field">
-      <input class = "checkbox" type = "checkbox" name = "order[wrap]">    Wrap</input>
+      <input class = "checkbox" type = "checkbox" name = "monthly_order[wrap]">    Wrap</input>
     </div>
 
-    <input class="submit-button button is-light" type="submit" value="Create Order" />
+    <input class="submit_button button is-light" type="submit" value="Create Order" />
 
   </form>
 </div>

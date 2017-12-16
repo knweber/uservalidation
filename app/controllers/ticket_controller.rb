@@ -1,0 +1,2 @@
+post '/tickets' do
+end
