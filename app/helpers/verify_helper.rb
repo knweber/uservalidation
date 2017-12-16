@@ -8,7 +8,7 @@ helpers do
 # Checks all user info, writes invalid users to
 # invalid_emails.txt and creates new influencers in DB for valid users
 
-  def verify_emails(users)
+  def invalid_emails(users)
     invalid_users = []
 
     users.each do |user|
@@ -16,20 +16,21 @@ helpers do
 
       if !EmailValidator.valid?(email) || /gmaill/ =~ email || /example/ =~ email || /.comm/ =~ email
         invalid_users.push("Name: " + user[0] + " " + user[1] + ", Invalid Email: " + user[7] + " \n")
-      else
-        create_influencer(user)
       end
+    end
 
-      if invalid_users.length > 0
-        File.open('invalid_emails.txt','a+') do |file|
-          file.write(DateTime.now)
+    if invalid_users.length > 0
+      File.open('invalid_emails.txt','a+') do |file|
+        file.write(DateTime.now)
+        file.write("\n")
+        invalid_users.each do |user|
+          file.write(user)
           file.write("\n")
-          invalid_users.each do |user|
-            file.write(user)
-            file.write("\n")
-          end
+          return false
         end
       end
+    else
+      return true
     end
   end
 
