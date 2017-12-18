@@ -1,2 +1,0 @@
-post '/tickets' do
-end

@@ -5,9 +5,9 @@ class CreateLineItems < ActiveRecord::Migration
       t.string :product_id
       t.string :sku
       t.integer :quantity
-      t. :price
+      t.decimal :price
       t.string :title
-      t.integer :influencer_order_id
+      t.integer :influencer_order_id, null:false
     end
   end
 end
