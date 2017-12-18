@@ -13,6 +13,7 @@ gem 'sinatra-support'
 gem 'activesupport', '~>4.2.0'
 gem 'activerecord', '~>4.2.0'
 gem 'email_validator'
+gem 'rest-client'
 
 gem 'rake'
 

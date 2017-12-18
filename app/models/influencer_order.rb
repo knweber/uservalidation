@@ -3,7 +3,6 @@ require 'securerandom'
 class InfluencerOrder < ActiveRecord::Base
 
   validates :order_number, uniqueness:true
-  validates :email, presence:true
   validates :send_receipt
   validates :send_fulfillment_receipt
   validates :influencer_id, presence:true
@@ -13,9 +12,10 @@ class InfluencerOrder < ActiveRecord::Base
   has_many :influencer_items
 
   def self.generate_order_number
-    "#IN" + SecureRandom.hex(6)
+    self.order_number = "#IN" + SecureRandom.hex(6)
   end
 
-  def
+  def self.generate_influencer_items
+  end
 
 end
