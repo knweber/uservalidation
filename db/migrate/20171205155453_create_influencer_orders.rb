@@ -1,12 +1,12 @@
-class CreateTickets < ActiveRecord::Migration
+class CreateInfluencerOrder < ActiveRecord::Migration
   def change
-    create_table :tickets do |t|
+    create_table :influencer_items do |t|
       t.string :order_number, :unique => true
-      t.datetime :time_order_submitted
-      t.boolean :processed
+      t.string :email
       t.boolean :send_receipt
       t.boolean :send_fulfillment_receipt
       t.string :note
+      t.integer :influencer_id
     end
   end
 end

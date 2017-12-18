@@ -1,4 +1,5 @@
 get '/monthly_orders/new/3-item' do
+  # if CSV document has already been processed
   if Influencer.count != 0
     erb :'monthly_orders/new3'
   else
@@ -7,6 +8,7 @@ get '/monthly_orders/new/3-item' do
 end
 
 get '/monthly_orders/new/5-item' do
+  # if CSV document has already been processed
   if Influencer.count != 0
     erb :'monthly_orders/new5'
   else

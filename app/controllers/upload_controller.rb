@@ -7,7 +7,6 @@ get '/uploads/new' do
   erb :'uploads/new'
 end
 
-
 post '/uploads' do
 
   influencer_data = params[:file][:tempfile].read
@@ -19,9 +18,7 @@ post '/uploads' do
 
     invalids = File.read('invalid_emails.txt')
 
-    # flash[:error] = "Some of the records you submitted are incorrect. Please fix the following records and try again."
-
-    redirect '/uploads/new', locals: { incorrect_records: invalids }
+    return erb :'uploads/new', locals: { errors: "Some of the records you submitted are incorrect. Please fix the following records and try again.", invalids: invalids }
 
   else
     influencer_rows.each do |user|
