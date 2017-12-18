@@ -10,7 +10,7 @@ class InfluencerOrder < ActiveRecord::Base
 
   belongs_to :influencer
 
-  has_many :influencer_items
+  has_many :line_items
 
   def self.generate_order_number
     self.order_number = "#IN" + SecureRandom.hex(6)
