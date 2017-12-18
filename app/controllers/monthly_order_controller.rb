@@ -1,3 +1,7 @@
+get '/monthly_orders' do
+  erb :'monthly_orders/index'
+end
+
 get '/monthly_orders/new/3-item' do
   # if CSV document has already been processed
   if Influencer.count != 0
@@ -30,7 +34,7 @@ get '/monthly_orders/:id' do
   monthly_order_items = []
 
   @monthly_order.attributes.each do |attr_name, attr_value|
-    if attr_value == true && attr_name != 'three_item' && attr_name != 'collection_placeholder' && attr_name != 'name'
+    if attr_value == true && attr_name != 'three_item' && attr_name != 'name'
       monthly_order_items.push(items[attr_name])
     end
   end
@@ -40,7 +44,7 @@ end
 
 post '/monthly_orders' do
   monthly_order_params = params[:monthly_order]
-  @monthly_order = Monthly_Order.create(monthly_order_params)
+  @monthly_order = MonthlyOrder.create(monthly_order_params)
 
   redirect "/monthly_orders/#{@monthly_order.id}"
 end

@@ -1,4 +1,5 @@
 require 'securerandom'
+require 'csv'
 
 class InfluencerOrder < ActiveRecord::Base
 
@@ -15,7 +16,15 @@ class InfluencerOrder < ActiveRecord::Base
     self.order_number = "#IN" + SecureRandom.hex(6)
   end
 
-  def self.generate_influencer_items
+  # def self.generate_influencer_items
+  #
+  # end
+
+  def download_csv(filename)
+    content_type('application/csv')
+    attachment(filename)
+    generate_file()
   end
+
 
 end

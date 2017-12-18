@@ -19,5 +19,7 @@ post '/influencers/:influencer_id/influencer_orders' do
   @influencer_order.generate_order_number
 
   if @influencer_order.save
+    redirect '/monthly_orders'
+  end
 
 end
