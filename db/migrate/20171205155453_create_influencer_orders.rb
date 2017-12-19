@@ -5,6 +5,7 @@ class CreateInfluencerOrder < ActiveRecord::Migration
       t.boolean :send_receipt
       t.boolean :send_fulfillment_receipt
       t.integer :influencer_id, null:false
+      t.integer :ticket_id
     end
   end
 end

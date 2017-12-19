@@ -9,6 +9,7 @@ class InfluencerOrder < ActiveRecord::Base
   validates :influencer_id, presence:true
 
   belongs_to :influencer
+  belongs_to :ticket
 
   has_many :line_items
 
