@@ -2,10 +2,10 @@
 <br />
 
 <!-- tests currently failing for flash -->
-<% if errors %>
+<% if @errors %>
   <%= errors %>
   <p>
-    <% invalids.split("\n").each do |record| %>
+    <% @invalids.split("\n").each do |record| %>
       <p>
         <%= record %>
       </p>

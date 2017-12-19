@@ -1,4 +1,4 @@
-get '/tickets' do
+post '/tickets' do
   @influencer_orders = InfluencerOrder.all
 
   @ticket = Ticket.new
