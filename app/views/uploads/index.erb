@@ -1,0 +1,46 @@
+<h2>Uploaded File:</h2>
+<br />
+
+<h3>Influencers:</h3>
+<p>
+  Count: <%= Influencer.count %>
+</p>
+
+<div class="three-item-influencers">
+  <p>
+    <strong>Three-Item:</strong>
+  </p>
+  <p>
+    <form method="get" action="/monthly_orders/new/3-item">
+      <input type="button" value="Select Items for Order">
+    </form>
+  </p>
+
+  <% @influencers.each do |influencer| %>
+    <% if influencer.three_item == true %>
+      <p>
+        <%= influencer.first_name + " " + influencer.last_name %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
+
+<hr>
+<div class="five-item-influencers">
+  <p>
+    <strong>Five-Item:</strong>
+  </p>
+  <p>
+    <form method="get" action="/monthly_orders/new/5-item">
+      <input type="button" value="Select Items for Order">
+    </form>
+  </p>
+
+  <% @influencers.each do |influencer| %>
+    <% if influencer.three_item == false %>
+      <p>
+        <%= influencer.first_name + " " + influencer.last_name %>
+      </p>
+    <% end %>
+  <% end %>
+</div>
