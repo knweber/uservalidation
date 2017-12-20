@@ -14,6 +14,7 @@ gem 'activesupport', '~>4.2.0'
 gem 'activerecord', '~>4.2.0'
 gem 'email_validator'
 gem 'rest-client'
+gem 'shopify_api'
 
 gem 'rake'
 

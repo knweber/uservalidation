@@ -19,8 +19,8 @@ post '/uploads' do
   else
     influencer_rows.each do |user|
       create_influencer(user)
+    end
       @influencers = Influencer.all
       erb :'uploads/index'
-    end
   end
 end

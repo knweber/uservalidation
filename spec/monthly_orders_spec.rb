@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-xdescribe 'MonthlyOrder Controller' do
+describe 'MonthlyOrder Controller' do
 
   context 'get /monthly_orders/new/3-item route' do
 
-    context 'valid CSV submission' do
+    xcontext 'after valid CSV submission' do
 
       it 'should respond successfully to the /monthly_orders/new/3-item route' do
         get '/monthly_orders/new/3-item'
@@ -17,12 +17,16 @@ xdescribe 'MonthlyOrder Controller' do
       end
     end
 
-    context 'invalid CSV submission' do
+    context 'after invalid CSV submission' do
 
       it 'should redirect' do
+        get '/monthly_orders/new/3-item'
+        expect(last_response.status).to eq(302)
       end
 
       it 'should redirect to /uploads/new' do
+        get '/monthly_orders/new/3-item'
+        expect(last_response.location).to include('/uploads/new')
       end
 
     end
@@ -31,7 +35,7 @@ xdescribe 'MonthlyOrder Controller' do
 
   context 'get /monthly_orders/new/5-item route' do
 
-    context 'valid CSV submission' do
+    xcontext 'after valid CSV submission' do
 
       it 'should respond successfully to the /monthly_orders/new/5-item route' do
         get '/monthly_orders/new/5-item'
@@ -44,12 +48,16 @@ xdescribe 'MonthlyOrder Controller' do
       end
     end
 
-    context 'invalid CSV submission' do
+    context 'after invalid CSV submission' do
 
       it 'should redirect' do
+        get '/monthly_orders/new/5-item'
+        expect(last_response.status).to eq(302)
       end
 
       it 'should redirect to /uploads/new' do
+        get '/monthly_orders/new/5-item'
+        expect(last_response.location).to include('/uploads/new')
       end
 
     end

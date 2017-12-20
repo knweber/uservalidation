@@ -1,11 +1,10 @@
 <h3><strong>Upload Influencers CSV</strong></h3>
 <br />
 
-<!-- tests currently failing for flash -->
-<% if errors %>
+<% if @errors %>
   <%= errors %>
   <p>
-    <% invalids.split("\n").each do |record| %>
+    <% @invalids.split("\n").each do |record| %>
       <p>
         <%= record %>
       </p>
