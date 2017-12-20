@@ -4,7 +4,7 @@ describe 'MonthlyOrder Controller' do
 
   context 'get /monthly_orders/new/3-item route' do
 
-    xcontext 'valid CSV submission' do
+    xcontext 'after valid CSV submission' do
 
       it 'should respond successfully to the /monthly_orders/new/3-item route' do
         get '/monthly_orders/new/3-item'
@@ -17,7 +17,7 @@ describe 'MonthlyOrder Controller' do
       end
     end
 
-    context 'invalid CSV submission' do
+    context 'after invalid CSV submission' do
 
       it 'should redirect' do
         get '/monthly_orders/new/3-item'
@@ -35,7 +35,7 @@ describe 'MonthlyOrder Controller' do
 
   context 'get /monthly_orders/new/5-item route' do
 
-    xcontext 'valid CSV submission' do
+    xcontext 'after valid CSV submission' do
 
       it 'should respond successfully to the /monthly_orders/new/5-item route' do
         get '/monthly_orders/new/5-item'
@@ -48,7 +48,7 @@ describe 'MonthlyOrder Controller' do
       end
     end
 
-    context 'invalid CSV submission' do
+    context 'after invalid CSV submission' do
 
       it 'should redirect' do
         get '/monthly_orders/new/5-item'

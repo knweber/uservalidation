@@ -10,23 +10,23 @@ class Ticket < ActiveRecord::Base
   end
 
   def create_csv_file(filename)
-    @influencers = Influencer.all
+    @influencer_orders = InfluencerOrder.all
     column_header = header_mapping
     CSV.open(filename,'w',:write_headers => true,
     :headers => column_header) do |header|
       column_header = nil
-      @BLAH???.each do |influencer|
+      @influencer_orders.each do |row|
         data_out = [order.order_number,
           "",
           "",
           "",
           "",
           "",
-          influencer.first_name + " " + influencer.last_name,
-          influencer.address1,
-          influencer.city,
-          influencer.state,
-          influencer.zip,
+          order.influencer.first_name + " " + order.influencer.last_name,
+          order.influencer.address1,
+          order.influencer.city,
+          order.influencer.state,
+          order.influencer.zip,
           "US",
           "FALSE",
           "",
@@ -42,11 +42,11 @@ class Ticket < ActiveRecord::Base
           "",
           "",
           "",
-          influencer.first_name + " " + influencer.last_name,
-          influencer.address1,
-          influencer.city,
-          influencer.state,
-          influencer.zip,
+          order.influencer.first_name + " " + order.influencer.last_name,
+          order.influencer.address1,
+          order.influencer.city,
+          order,influencer.state,
+          order.influencer.zip,
           "US",
           "",
           "",
@@ -55,7 +55,7 @@ class Ticket < ActiveRecord::Base
           "",
           "",
           "",
-          influencer.phone,
+          order.influencer.phone,
           "",
           "",
           "",
@@ -73,9 +73,9 @@ class Ticket < ActiveRecord::Base
           "",
           "",
           "",
-          ""
+          "" + "\n"
         ]
-        header << data_out
+        row << data_out
       end
     end
   end

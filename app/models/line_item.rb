@@ -12,4 +12,10 @@ class LineItem < ActiveRecord::Base
 
   has_many :item_properties
 
+  $apikey = ENV['ELLIE_STAGING_API_KEY']
+  $password = ENV['ELLIE_STAGING_PASSWORD']
+  $shopname = ENV['SHOPNAME']
+
+  ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+
 end
