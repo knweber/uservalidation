@@ -11,18 +11,18 @@ class App < ActiveRecord::Base
 
   ShopifyAPI::Base.site = $shop_url
 
-  def check_shopify_call_limit(headerinfo, shop_wait)
-      puts "raw Shopify call limit info: #{headerinfo}"
-      header_data = headerinfo.split('/')
-      my_numerator = header_data[0].to_i
-      my_denominator = header_data[1].to_i
-      percentage = (my_numerator/my_denominator.to_f).round(2)
-      puts "Used #{percentage} of Shopify call limits"
-      if percentage >= 0.7
-        puts "Sleeping #{shop_wait}"
-        sleep shop_wait
-      end
-  end
+  # def check_shopify_call_limit(headerinfo, shop_wait)
+  #     puts "raw Shopify call limit info: #{headerinfo}"
+  #     header_data = headerinfo.split('/')
+  #     my_numerator = header_data[0].to_i
+  #     my_denominator = header_data[1].to_i
+  #     percentage = (my_numerator/my_denominator.to_f).round(2)
+  #     puts "Used #{percentage} of Shopify call limits"
+  #     if percentage >= 0.7
+  #       puts "Sleeping #{shop_wait}"
+  #       sleep shop_wait
+  #     end
+  # end
 
 
 end
