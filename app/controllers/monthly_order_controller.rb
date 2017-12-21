@@ -34,12 +34,12 @@ get '/monthly_orders/:id' do
   monthly_order_items = []
 
   @monthly_order.attributes.each do |attr_name, attr_value|
-    if attr_value == true && attr_name != 'three_item' && attr_name != 'name'
+    if attr_value == true && items[attr_name]
       monthly_order_items.push(items[attr_name])
     end
   end
 
-  erb :'monthly_orders/show', locals: { items: monthly_order_items }
+  erb :'monthly_orders/show', locals: { order: @monthly_order }
 end
 
 post '/monthly_orders' do

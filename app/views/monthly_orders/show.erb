@@ -3,8 +3,10 @@
 <p></p>
 <div>
   <ul>
-    <% items.each do |item| %>
-      <li> <%= item %> </li>
+    <% order.attributes.each do |attr_key,attr_val| %>
+      <% if attr_val == true && attr_key != "three_item" %>
+        <li> <%= attr_key %> </li>
+      <% end %>
     <% end %>
   <ul>
 </div>
