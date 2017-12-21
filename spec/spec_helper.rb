@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'simplecov'
+require 'factory_bot'
+require 'faker'
+
 SimpleCov.start
 
 # All our specs should require 'spec_helper' (this file)
@@ -14,6 +17,10 @@ require 'shoulda-matchers'
 require 'rack/test'
 require 'capybara'
 require 'capybara/rspec'
+
+FactoryBot.definition_file_paths = [File.expand_path('../factories', __FILE__)]
+
+FactoryBot.find_definitions
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods

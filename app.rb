@@ -1,3 +1,6 @@
+require 'sinatra'
+require 'sinatra/activerecord'
+
 class App < ActiveRecord::Base
 
   $apikey = ENV['ELLIE_STAGING_API_KEY']

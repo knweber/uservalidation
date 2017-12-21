@@ -8,8 +8,11 @@ get '/uploads/new' do
 end
 
 post '/uploads' do
-  influencer_data = params[:file][:tempfile].read
+  File.open('invalid_emails.txt','a+') do |file|
+    file.truncate(0)
+  end
 
+  influencer_data = params[:file][:tempfile].read
   influencer_rows = CSV.parse(influencer_data, headers: true, header_converters: :symbol)
 
   if !invalid_emails(influencer_rows)

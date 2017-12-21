@@ -3,7 +3,6 @@ require 'csv'
 
 class InfluencerOrder < ActiveRecord::Base
 
-  validates :order_number, uniqueness:true
   validates :influencer_id, presence:true
 
   belongs_to :influencer
@@ -11,8 +10,13 @@ class InfluencerOrder < ActiveRecord::Base
 
   has_many :line_items
 
-  def self.generate_order_number
-    self.order_number = "#IN" + SecureRandom.hex(6)
+  # def generate_number
+  #   unique_num = SecureRandom.random_number(36**12).to_s(36).rjust(12,"0")
+  # end
+
+  def order_number
+    @order_number ||= "#IN" + SecureRandom.random_number(36**12).to_s(36).rjust(12,"0")
+    self.order_number = @order_number
   end
 
 end

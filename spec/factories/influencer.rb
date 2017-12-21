@@ -6,8 +6,8 @@ FactoryBot.define do
     city { 'Poughkeepsie' }
     state { 'NY' }
     zip { '12604' }
-    email { 'dolphins@test.com' }
-    bra_size { }
+    email { Faker::Internet.safe_email }
+    bra_size { 'S' }
     top_size { 'S' }
     bottom_size { 'M' }
     sports_jacket_size { 'S' }
