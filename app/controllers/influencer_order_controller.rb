@@ -15,10 +15,9 @@ post '/influencers/:influencer_id/influencer_orders' do
 
   influencer_order_params = params[:influencer_order]
 
-  @influencer_order = InfluencerOrder.new(influencer_order_params)
-  @influencer_order.generate_order_number
+  @influencer_order = InfluencerOrder.create(influencer_order_params)
 
-  if @influencer_order.save
+  if @influencer_order.valid?
     redirect '/monthly_orders'
   end
 

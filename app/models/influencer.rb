@@ -11,5 +11,5 @@ class Influencer < ActiveRecord::Base
   validates :three_item, presence: true
 
   has_many :influencer_orders
-
+  has_many :tickets, through: :influencer_orders
 end
