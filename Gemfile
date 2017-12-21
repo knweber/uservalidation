@@ -25,6 +25,7 @@ group :test do
   gem 'rack-test'
   gem 'rspec', '~>3.0'
   gem 'capybara'
+  gem 'factory_bot'
   gem 'simplecov', :require => false
 end
 

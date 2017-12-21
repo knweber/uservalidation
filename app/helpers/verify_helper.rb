@@ -38,8 +38,15 @@ helpers do
 
   def create_influencer(user)
     email = user[7]
+
+    if user[13].downcase == "yes" || user[13].downcase == "y"
+      user[13] = true
+    else
+      user[13] = false
+    end
+
     if !Influencer.find_by(email: email)
-      influencer = Influencer.new(
+      influencer = Influencer.create(
         first_name: user[0],
         last_name: user[1],
         address1: user[2],
@@ -55,19 +62,14 @@ helpers do
         sports_jacket_size: user[12],
         three_item: user[13])
 
-      if three_item.downcase == "yes" || three_item.downcase == "y"
-        three_item = true
-      else
-        three_item = false
-      end
-
-      influencer.save
-
       puts "Influencer created!"
       puts "#{influencer.first_name} #{influencer.last_name},\nID: #{influencer.id},\nEmail: #{influencer.email},\nThree-item: #{influencer.three_item}"
-    else
-      puts "Influencer already exists:"
-      puts "#{influencer.first_name} #{influencer.last_name},\nID: #{influencer.id},\nEmail: #{influencer.email},\nThree-item: #{influencer.three_item}"
+
+
+    # else
+    #   puts "Influencer already exists:"
+    #   puts "#{influencer.first_name} #{influencer.last_name},\nID: #{influencer.id},\nEmail: #{influencer.email},\nThree-item: #{influencer.three_item}"
+
     end
   end
 

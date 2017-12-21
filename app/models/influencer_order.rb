@@ -4,8 +4,6 @@ require 'csv'
 class InfluencerOrder < ActiveRecord::Base
 
   validates :order_number, uniqueness:true
-  validates :send_receipt
-  validates :send_fulfillment_receipt
   validates :influencer_id, presence:true
 
   belongs_to :influencer

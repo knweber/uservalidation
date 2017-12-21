@@ -14,7 +14,7 @@ class CreateInfluencers < ActiveRecord::Migration
       t.string :top_size, null:false
       t.string :bottom_size, null:false
       t.string :sports_jacket_size, null:false
-      t.string :three_item, null:false
+      t.boolean :three_item, null:false
 
       t.index :last_name
       t.index :email

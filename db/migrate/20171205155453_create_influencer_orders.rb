@@ -1,4 +1,4 @@
-class CreateInfluencerOrder < ActiveRecord::Migration
+class CreateInfluencerOrders < ActiveRecord::Migration
   def change
     create_table :influencer_orders do |t|
       t.string :order_number, :unique => true

@@ -1,6 +1,3 @@
-<h2>Uploaded File:</h2>
-<br />
-
 <h3>Influencers:</h3>
 <p>
   Count: <%= Influencer.count %>
@@ -11,9 +8,7 @@
     <strong>Three-Item:</strong>
   </p>
   <p>
-    <form method="get" action="/monthly_orders/new/3-item">
-      <input type="button" value="Select Items for Order">
-    </form>
+    <a href="/monthly_orders/new/3-item">Select Items for Order</a>
   </p>
 
   <% @influencers.each do |influencer| %>
@@ -31,9 +26,7 @@
     <strong>Five-Item:</strong>
   </p>
   <p>
-    <form method="get" action="/monthly_orders/new/5-item">
-      <input type="button" value="Select Items for Order">
-    </form>
+    <a href="/monthly_orders/new/5-item">Select Items for Order</a>
   </p>
 
   <% @influencers.each do |influencer| %>
