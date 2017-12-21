@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'simplecov'
+require 'factory_bot'
+
 SimpleCov.start
 
 # All our specs should require 'spec_helper' (this file)

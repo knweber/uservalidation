@@ -1,3 +1,5 @@
+require 'factory_bot'
+
 FactoryBot.define do
   factory :influencer do
     first_name { 'Harry' }
@@ -6,7 +8,7 @@ FactoryBot.define do
     city { 'Poughkeepsie' }
     state { 'NY' }
     zip { '12604' }
-    email { 'dolphins@test.com' }
+    email { 'dolphins' + rand(1..5).to_s + '@test.com' }
     bra_size { }
     top_size { 'S' }
     bottom_size { 'M' }
