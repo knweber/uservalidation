@@ -1,8 +1,10 @@
 <h3><strong>Upload Influencers CSV</strong></h3>
 <br />
 
-<% if @errors %>
-  <%= errors %>
+<% if defined? errors %>
+  <% errors.each do |msg| %>
+    <p class="errors"> <%= msg %> </p>
+  <% end %>
   <p>
     <% @invalids.split("\n").each do |record| %>
       <p>

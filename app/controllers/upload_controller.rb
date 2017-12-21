@@ -14,8 +14,8 @@ post '/uploads' do
 
   if !invalid_emails(influencer_rows)
     status 422
-    invalids = File.read('invalid_emails.txt')
-    return erb :'uploads/new', locals: { errors: "Some of the records you submitted are incorrect. Please fix the following records and try again.", invalids: invalids }
+    @invalids = File.read('invalid_emails.txt')
+    return erb :'uploads/new', locals: { errors: ["Some of the records you submitted are incorrect. Please fix the following records and try again."], invalids: @invalids }
   else
     influencer_rows.each do |user|
       create_influencer(user)

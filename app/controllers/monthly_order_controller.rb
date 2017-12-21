@@ -21,7 +21,7 @@ get '/monthly_orders/new/5-item' do
 end
 
 get '/monthly_orders/:id' do
-  @monthly_order = Monthly_Order.find(params[:id])
+  @monthly_order = MonthlyOrder.find(params[:id])
 
   items = {
     leggings: 'Leggings',
