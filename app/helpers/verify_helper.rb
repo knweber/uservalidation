@@ -4,20 +4,25 @@ require 'email_validator'
 
 helpers do
 
-  accented_letters = 'ŠšŽžÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝŸÞàáâãäåæçèéêëìíîïñòóôõöøùúûüýÿþƒ'
-  without_accents = 'SsZzAAAAAAACEEEEIIIINOOOOOOUUUUYYBaaaaaaaceeeeiiiinoooooouuuuyybf'
+
 
 # Checks all user info, writes invalid users to
 # invalid_emails.txt and creates new influencers in DB for valid users
 
   def check_non_english(str)
-    str.split('').each do |letter|
-      if accented_letters.index(letter)
-        normal_char_idx = accented_letters.index(letter)
-        letter = without_accents[normal_char_idx]
+    accented_letters = 'ŠšŽžÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝŸÞàáâãäåæçèéêëìíîïñòóôõöøùúûüýÿþƒ'
+    without_accents = 'SsZzAAAAAAACEEEEIIIINOOOOOOUUUUYYBaaaaaaaceeeeiiiinoooooouuuuyybf'
+
+    i = 0
+    while i < str.length
+      if accented_letters.index(str[i])
+        idx = accented_letters.index(str[i])
+        to_replace = without_accents[idx]
+        str[i] = to_replace
       end
+      i += 1
     end
-    str.join('')
+    str
   end
 
   def invalid_emails(users)
