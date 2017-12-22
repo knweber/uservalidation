@@ -1,39 +1,44 @@
-<h3>Influencers:</h3>
-<p>
-  Count: <%= Influencer.count %>
-</p>
-
-<div class="three-item-influencers">
+<div class="notification is-success success-influencers">
   <p>
-    <strong>Three-Item:</strong>
+    <%= Influencer.count %> Influencers successfully created
   </p>
-  <p>
-    <a href="/monthly_orders/new/3-item">Select Items for Order</a>
-  </p>
-
-  <% @influencers.each do |influencer| %>
-    <% if influencer.three_item == true %>
-      <p>
-        <%= influencer.first_name + " " + influencer.last_name %>
-      </p>
-    <% end %>
-  <% end %>
 </div>
 
-<hr>
-<div class="five-item-influencers">
-  <p>
-    <strong>Five-Item:</strong>
-  </p>
-  <p>
-    <a href="/monthly_orders/new/5-item">Select Items for Order</a>
-  </p>
-
-  <% @influencers.each do |influencer| %>
-    <% if influencer.three_item == false %>
+<div class="order-button-container">
+  <div class="button-row">
+    <div class="three-item-influencers">
       <p>
-        <%= influencer.first_name + " " + influencer.last_name %>
+        <!-- <strong>Three-Item:</strong> -->
       </p>
-    <% end %>
-  <% end %>
+      <p>
+        <a class="button is-light" href="/monthly_orders/new/3-item">Create Three-Item Order</a>
+      </p>
+
+      <%# @influencers.each do |influencer| %>
+        <%# if influencer.three_item == true %>
+          <p>
+            <%#= influencer.first_name + " " + influencer.last_name %>
+          </p>
+        <%# end %>
+      <%# end %>
+    </div>
+
+    <!-- <hr> -->
+    <div class="five-item-influencers">
+      <p>
+        <!-- <strong>Five-Item:</strong> -->
+      </p>
+      <p>
+        <a class="button is-light" href="/monthly_orders/new/5-item">Create Five-Item Order</a>
+      </p>
+
+      <%# @influencers.each do |influencer| %>
+        <%# if influencer.three_item == false %>
+          <p>
+            <%#= influencer.first_name + " " + influencer.last_name %>
+          </p>
+        <%# end %>
+      <%# end %>
+    </div>
+  </div>
 </div>
