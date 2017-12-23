@@ -6,7 +6,6 @@ class App < ActiveRecord::Base
   $apikey = ENV['ELLIE_STAGING_API_KEY']
   $password = ENV['ELLIE_STAGING_PASSWORD']
   $shopname = ENV['SHOPNAME']
-  $shopify_wait = ENV['SHOPIFY_SLEEP_TIME']
 
   $header_info = ShopifyAPI::response.header["HTTP_X_SHOPIFY_SHOP_API_CALL_LIMIT"]
 

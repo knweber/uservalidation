@@ -1,4 +1,35 @@
+require 'rest-client'
+require 'sinatra'
+require 'shopify_api'
+require 'json'
+
+$apikey = ENV['ELLIE_STAGING_API_KEY']
+$password = ENV['ELLIE_STAGING_PASSWORD']
+$shopname = ENV['SHOPNAME']
+
+ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+
+
+# idk = ShopifyAPI::Product.where(title: "Leggings").first.variants.first
+
+# "?namespace=ellie_order_info&value=product_collection"
+
+# total_url = my_url + my_addon
+# puts total_url
+# response = RestClient.get(total_url)
+# puts response
+
+
+
 get '/monthly_orders' do
+  # my_url = "https://#{apikey}:#{password}@#{shopname}.myshopify.com/admin"
+  # my_addon = "/metafields.json?namespace=ellie_order_info"
+  #
+  # total_url = my_url + my_addon
+  # puts total_url
+  # response = HTTParty.get(total_url)
+  # puts response
+
   erb :'monthly_orders/index'
 end
 
@@ -45,6 +76,14 @@ end
 post '/monthly_orders' do
   monthly_order_params = params[:monthly_order]
   @monthly_order = MonthlyOrder.create(monthly_order_params)
+
+  inputted_title = params[:monthly_order][:name]
+  p "TITLE INPUTTED BELOW:"
+  p "You have entered #{inputted_title} in the form"
+
+  master_prod = ShopifyAPI::Collect.where(title: inputted_title)
+
+  # Find products for a collection by the collection title? What should the user enter as a collection/product identifier?
 
   redirect "/monthly_orders/#{@monthly_order.id}"
 end

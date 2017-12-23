@@ -8,7 +8,7 @@ describe InfluencerOrder, type: :model do
   context 'associations' do
     it { is_expected.to belong_to(:influencer) }
     it { is_expected.to belong_to(:ticket) }
-    xit { is_expected.to have_many(:line_items) }
+    it { is_expected.to have_many(:line_items) }
   end
 
   context 'virtual fields' do

@@ -2,7 +2,6 @@ require 'sinatra'
 
 enable :sessions
 
-
 get '/uploads/new' do
   erb :'uploads/new'
 end
