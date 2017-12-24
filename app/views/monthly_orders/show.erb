@@ -5,8 +5,12 @@
   <ul>
     <% order_items.each do |item| %>
       <p>
-        <li> <%= item %> </li>
+        <li> <%= item.title %> </li>
       </p>
     <% end %>
   <ul>
 </div>
+<br />
+<form id="create-influencer-order-form" action="/influencer_orders" method="post">
+  <input class="button is-light" type="submit" value="Create Influencer Orders" />
+</form>
