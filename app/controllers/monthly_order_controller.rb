@@ -1,24 +1,12 @@
 require 'rest-client'
 require 'sinatra'
 require 'shopify_api'
-require 'json'
 
 $apikey = ENV['ELLIE_STAGING_API_KEY']
 $password = ENV['ELLIE_STAGING_PASSWORD']
 $shopname = ENV['SHOPNAME']
 
 ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
-
-
-
-
-# "?namespace=ellie_order_info&value=product_collection"
-
-# total_url = my_url + my_addon
-# puts total_url
-# response = RestClient.get(total_url)
-# puts response
-
 
 
 get '/monthly_orders' do
@@ -64,19 +52,20 @@ get '/monthly_orders/:id' do
 
   monthly_order_items = []
 
-  @monthly_order.attributes.each do |attr_name, attr_value|
-    if attr_value == true && items[attr_name]
-      monthly_order_items.push(items[attr_name])
-    end
-  end
+  specific_items = ShopifyAPI::Product.where(collection_id: @monthly_order.master_prod_id)
 
-  erb :'monthly_orders/show', locals: { order: @monthly_order }
+  # @monthly_order.attributes.each do |attr_name, attr_value|
+  #   if attr_value == true && items[attr_name]
+  #     monthly_order_items.push(items[attr_name])
+  #   end
+  # end
+  erb :'monthly_orders/show', locals: { order_items: specific_items }
 end
 
 post '/monthly_orders' do
   master_product = ShopifyAPI::Collect.where(id: params[:monthly_order][:master_prod_id])
 
-  @monthly_order = MonthlyOrder.new(params[:monthly_order])
+  @monthly_order = MonthlyOrder.create(params[:monthly_order])
 
   redirect "/monthly_orders/#{@monthly_order.id}"
 end
