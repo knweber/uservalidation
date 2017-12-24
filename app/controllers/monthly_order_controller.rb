@@ -52,8 +52,6 @@ get '/monthly_orders/new/5-item' do
 end
 
 get '/monthly_orders/:id' do
-   # master_product = ShopifyAPI::Product.where(id: params[:order][:master_prod_id])
-
   @monthly_order = MonthlyOrder.find(params[:id])
 
   items = {
@@ -76,25 +74,9 @@ get '/monthly_orders/:id' do
 end
 
 post '/monthly_orders' do
-
   master_product = ShopifyAPI::Collect.where(id: params[:monthly_order][:master_prod_id])
 
-  leggings_checked? = params[:monthly_order][:leggings]
-  bra_checked? = params[:monthly_order][:sports_bra]
-  top_checked? = params[:monthly_order][:top]
-  jacket_checked? = params[:monthly_order][:sports_jacket]
-  wrap_checked? = params[:monthly_order][:wrap]
-
-  @monthly_order = MonthlyOrder.create(monthly_order_params)
-
-
-
-  # p "TITLE INPUTTED BELOW:"
-  # p "You have entered #{inputted_title} in the form"
-  #
-  # master_prod = ShopifyAPI::Collect.where(title: inputted_title)
-
-  # Find products for a collection by the collection title? What should the user enter as a collection/product identifier?
+  @monthly_order = MonthlyOrder.new(params[:monthly_order])
 
   redirect "/monthly_orders/#{@monthly_order.id}"
 end

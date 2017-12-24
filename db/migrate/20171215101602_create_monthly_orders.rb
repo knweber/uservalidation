@@ -2,7 +2,7 @@ class CreateMonthlyOrders < ActiveRecord::Migration
   def change
     create_table :monthly_orders do |t|
 
-      t.string :name, :null => false
+      t.string :master_prod_id, :null => false
       t.boolean :leggings, :default => false
       t.boolean :sports_bra, :default => false
       t.boolean :sports_jacket, :default => false
