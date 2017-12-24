@@ -33,7 +33,7 @@ describe 'Upload Controller' do
       it 'should redirect to /uploads/new after submission' do
       end
 
-      it 'should display a flash error message' do
+      it 'should display an error message' do
       end
     end
 

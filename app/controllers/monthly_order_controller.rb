@@ -78,10 +78,10 @@ post '/monthly_orders' do
   @monthly_order = MonthlyOrder.create(monthly_order_params)
 
   inputted_title = params[:monthly_order][:name]
-  p "TITLE INPUTTED BELOW:"
-  p "You have entered #{inputted_title} in the form"
-
-  master_prod = ShopifyAPI::Collect.where(title: inputted_title)
+  # p "TITLE INPUTTED BELOW:"
+  # p "You have entered #{inputted_title} in the form"
+  #
+  # master_prod = ShopifyAPI::Collect.where(title: inputted_title)
 
   # Find products for a collection by the collection title? What should the user enter as a collection/product identifier?
 

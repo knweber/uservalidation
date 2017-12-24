@@ -1,14 +1,19 @@
 require 'spec_helper'
+include Helpers
+require_relative '../../app/helpers/verify_helper.rb'
 
-xdescribe helpers do
+describe helpers do
 
   context '#check_non_english' do
     it 'should replace non-English letters with their English equivalents' do
+      str = 'aabbcc'
+      fixed = check_non_english(str)
+      expect(fixed).to eq(str)
 
     end
   end
 
-  context '#invalid_emails' do
+  xcontext '#invalid_emails' do
 
     it 'should check the validity of each user\'s email address' do
 
@@ -32,7 +37,7 @@ xdescribe helpers do
 
   end
 
-  context '#create_influencer' do
+  xcontext '#create_influencer' do
 
     it 'should scan user records and change three_item yes/y values to true' do
     end

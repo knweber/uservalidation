@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'factory_bot'
 
 describe InfluencerOrder, type: :model do
   context 'validations' do
@@ -13,7 +14,6 @@ describe InfluencerOrder, type: :model do
 
   context 'virtual fields' do
     it 'has a randomly generated order number' do
-      # order = FactoryBot.create(:influencer_order, influencer_id: 1)
       order = FactoryBot.create(:influencer_order, influencer_id: 1)
       expect(order.order_number).not_to be(nil)
       p order.order_number

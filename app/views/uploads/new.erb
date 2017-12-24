@@ -2,9 +2,11 @@
 <br />
 
 <% if defined? errors %>
-  <% errors.each do |msg| %>
-    <p class="errors"> <%= msg %> </p>
-  <% end %>
+  <div class="notification is-danger error-upload">
+    <% errors.each do |msg| %>
+      <p class="errors"> <%= msg %> </p>
+    <% end %>
+  </div>
   <p>
     <% @invalids.split("\n").each do |record| %>
       <p>

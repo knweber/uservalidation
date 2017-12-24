@@ -4,8 +4,6 @@ require 'email_validator'
 
 helpers do
 
-
-
 # Checks all user info, writes invalid users to
 # invalid_emails.txt and creates new influencers in DB for valid users
 

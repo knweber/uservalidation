@@ -1,9 +1,30 @@
 require 'sinatra'
+require 'rest-client'
 
 enable :sessions
 
+$apikey = ENV['ELLIE_STAGING_API_KEY']
+$password = ENV['ELLIE_STAGING_PASSWORD']
+$shopname = ENV['SHOPNAME']
+
+base = ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+
+
 get '/uploads/new' do
   erb :'uploads/new'
+
+  # addon = "/products.json?fields=handle&limit=250"
+  # total_url = base + addon
+  # puts "**************"
+  # response = RestClient.get(total_url)
+  # puts response
+  #
+  # addon = "/products/count.json?"
+  # total_url = base + addon
+  # puts "_________"
+  # response = RestClient.get(total_url)
+  # puts response
+
 end
 
 post '/uploads' do
