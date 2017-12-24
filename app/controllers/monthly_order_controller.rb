@@ -10,7 +10,7 @@ $shopname = ENV['SHOPNAME']
 ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
 
-# idk = ShopifyAPI::Product.where(title: "Leggings").first.variants.first
+
 
 # "?namespace=ellie_order_info&value=product_collection"
 
@@ -52,6 +52,8 @@ get '/monthly_orders/new/5-item' do
 end
 
 get '/monthly_orders/:id' do
+   # master_product = ShopifyAPI::Product.where(id: params[:order][:master_prod_id])
+
   @monthly_order = MonthlyOrder.find(params[:id])
 
   items = {
@@ -74,10 +76,19 @@ get '/monthly_orders/:id' do
 end
 
 post '/monthly_orders' do
-  monthly_order_params = params[:monthly_order]
+
+  master_product = ShopifyAPI::Collect.where(id: params[:monthly_order][:master_prod_id])
+
+  leggings_checked? = params[:monthly_order][:leggings]
+  bra_checked? = params[:monthly_order][:sports_bra]
+  top_checked? = params[:monthly_order][:top]
+  jacket_checked? = params[:monthly_order][:sports_jacket]
+  wrap_checked? = params[:monthly_order][:wrap]
+
   @monthly_order = MonthlyOrder.create(monthly_order_params)
 
-  inputted_title = params[:monthly_order][:name]
+
+
   # p "TITLE INPUTTED BELOW:"
   # p "You have entered #{inputted_title} in the form"
   #
