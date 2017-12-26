@@ -1,8 +1,10 @@
 require 'spec_helper'
-include Helpers
-require_relative '../../app/helpers/verify_helper.rb'
 
-describe helpers do
+describe "ValidationHelpers" do
+  
+  subject do
+    Class.new { include ValidationHelpers }
+  end
 
   context '#check_non_english' do
     it 'should replace non-English letters with their English equivalents' do
