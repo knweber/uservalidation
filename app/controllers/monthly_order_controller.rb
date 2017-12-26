@@ -1,4 +1,3 @@
-require 'rest-client'
 require 'sinatra'
 require 'shopify_api'
 
@@ -54,6 +53,10 @@ get '/monthly_orders/:id' do
 
   specific_items = ShopifyAPI::Product.where(collection_id: @monthly_order.master_prod_id)
 
+  puts "|||||||||"
+  puts "SPECIFIC ITEMS:"
+  puts specific_items
+
   # @monthly_order.attributes.each do |attr_name, attr_value|
   #   if attr_value == true && items[attr_name]
   #     monthly_order_items.push(items[attr_name])
@@ -63,7 +66,18 @@ get '/monthly_orders/:id' do
 end
 
 post '/monthly_orders' do
-  master_product = ShopifyAPI::Collect.where(id: params[:monthly_order][:master_prod_id])
+  master_product = ShopifyAPI::Product.where(id: '409383338016')
+
+  puts master_product
+
+  # my_url = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+  # my_addon = "/products/409383338016.json"
+
+  # total_url = my_url + my_addon
+  # puts total_url
+  # response = RestClient.get(total_url)
+  # puts "********************"
+  # puts response
 
   @monthly_order = MonthlyOrder.create(params[:monthly_order])
 

@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'rest-client'
+require 'httparty'
 
 enable :sessions
 
@@ -11,6 +11,28 @@ base = ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.mys
 
 
 get '/uploads/new' do
+  # master_product = ShopifyAPI::Product.where(id: 69026938898)
+  #
+  # p "*********"
+  # p master_product
+  # p "*********"
+  #
+  #
+  # master_product.each do |item|
+  #   p item.title
+  # end
+
+  base = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+
+  addon = "/products.json?collection_id=69026938898"
+
+  total = base + addon
+
+  response = HTTParty.get(total)
+
+  p response
+
+
   erb :'uploads/new'
 
   # addon = "/products.json?fields=handle&limit=250"

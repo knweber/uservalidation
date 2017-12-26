@@ -2,7 +2,7 @@ require 'date'
 require 'csv'
 require 'email_validator'
 
-helpers do
+module ValidationHelpers do
 
 # Checks all user info, writes invalid users to
 # invalid_emails.txt and creates new influencers in DB for valid users
@@ -84,3 +84,5 @@ helpers do
   end
 
 end
+
+Sinatra::Application.helpers ValidationHelpers
