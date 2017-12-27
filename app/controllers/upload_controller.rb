@@ -10,9 +10,46 @@ $shopname = ENV['SHOPNAME']
 
 base = ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
-
 get '/uploads/new' do
   p "*****"
+
+  # collection_id = 386209925
+
+  # collection = ShopifyAPI::Collect.find(:all, :params => {:collection_id => collection_id})
+
+  # p collection
+
+  # master_product = ShopifyAPI::Product.where(title: "Power Moves - 3 Item", id: 409385271328, fields: 'variants')
+  # p variant_meta_test
+  # p "||||||||||||||"
+
+  # p ShopifyAPI::Product.where(id: 485063950368, fields: "title")
+  # all_metafields = variant_meta_test.metafields
+  # p all_metafields
+  # all_metafields.each do |mymeta|
+  #   puts "#{mymeta.key}, #{mymeta.value}"
+  #   if mymeta.key == 'Discontinued'
+  #     puts "Found Discountinued" #below changes value mymeta.value = 'false' mymeta.save
+  #   end
+  # end
+
+  prod = ShopifyAPI::Metafield.first.product_collection
+
+  p prod
+
+  # (params: {resource: 'variants', resource_id: 5163866357792, fields: 'key,value'})
+  # p prod
+  p "___________"
+
+  # my_url = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+  # my_addon = "/products/409385271328/metafields.json"
+  #
+  # total_url = my_url + my_addon
+  # puts total_url
+  # response = HTTParty.get(total_url)
+  # puts "********************"
+  # puts response
+
   erb :'uploads/new'
 end
 

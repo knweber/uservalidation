@@ -12,7 +12,7 @@ SHOPIFY_ELLIE_3PACK_VARIANT_ID = ENV['SHOPIFY_ELLIE_3PACK_VARIANT_ID']
 
 post '/influencer_orders' do
   Influencer.all.each do |user|
-    
+
   end
   @influencer_order = InfluencerOrder.create(influencer_order_params)
 

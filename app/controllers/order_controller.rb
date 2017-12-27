@@ -7,8 +7,7 @@ $shopname = ENV['SHOPNAME']
 
 ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
-
-get '/monthly_orders' do
+# get '/monthly_orders' do
   # my_url = "https://#{apikey}:#{password}@#{shopname}.myshopify.com/admin"
   # my_addon = "/metafields.json?namespace=ellie_order_info"
   #
@@ -17,10 +16,10 @@ get '/monthly_orders' do
   # response = HTTParty.get(total_url)
   # puts response
 
-  erb :'monthly_orders/index'
-end
+#   erb :'monthly_orders/index'
+# end
 
-get '/monthly_orders/new/3-item' do
+get '/orders/new/3-item' do
   # if CSV document has already been processed
   if Influencer.count != 0
     erb :'monthly_orders/new3'
@@ -29,7 +28,7 @@ get '/monthly_orders/new/3-item' do
   end
 end
 
-get '/monthly_orders/new/5-item' do
+get '/orders/new/5-item' do
   # if CSV document has already been processed
   if Influencer.count != 0
     erb :'monthly_orders/new5'
@@ -38,8 +37,8 @@ get '/monthly_orders/new/5-item' do
   end
 end
 
-get '/monthly_orders/:id' do
-  @monthly_order = MonthlyOrder.find(params[:id])
+get '/orders/:id' do
+  # @monthly_order = MonthlyOrder.find(params[:id])
 
   items = {
     leggings: 'Leggings',
@@ -62,17 +61,17 @@ get '/monthly_orders/:id' do
   #     monthly_order_items.push(items[attr_name])
   #   end
   # end
-  erb :'monthly_orders/show', locals: { order_items: specific_items }
+  erb :'orders/show', locals: { order_items: specific_items }
 end
 
-post '/monthly_orders' do
-  master_prod_id = params[:monthly_order][:master_prod_id]
-  master_prod_name = params[:monthly_order][:master_prod_name]
+post '/orders' do
+  master_prod_id = params[:order][:master_prod_id]
+  master_prod_name = params[:order][:master_prod_name]
 
   master_prod = ShopifyAPI::Product.where(title: master_prod_name, id: master_prod_id)
 
 
   @monthly_order = MonthlyOrder.create(params[:monthly_order])
 
-  redirect "/monthly_orders/#{@monthly_order.id}"
+  redirect "/orders/#{@order.id}"
 end
