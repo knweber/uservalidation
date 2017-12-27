@@ -64,13 +64,16 @@ get '/orders/:id' do
 end
 
 post '/orders' do
-  master_prod_id = params[:order][:master_prod_id]
-  master_prod_name = params[:order][:master_prod_name]
+  order_params = params[:order]
+  Influencer.all.each do |user|
+    order_params[:influencer_id] = user.id
+    order = Order.new(order_params)
+  end
 
-  master_prod = ShopifyAPI::Product.where(title: master_prod_name, id: master_prod_id)
+  redirect '/tickets/new'
 
 
-  @order = MonthlyOrder.create(params[:monthly_order])
+  # master_prod = ShopifyAPI::Product.where(title: master_prod_name, id: master_prod_id)
 
-  redirect "/orders/#{@order.id}"
+  # redirect "/orders/#{@order.id}"
 end
