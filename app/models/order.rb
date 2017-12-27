@@ -10,13 +10,15 @@ class Order < ActiveRecord::Base
 
   has_many :line_items
 
-  # def generate_number
-  #   unique_num = SecureRandom.random_number(36**12).to_s(36).rjust(12,"0")
-  # end
-
   def order_number
     @order_number ||= "#IN" + SecureRandom.random_number(36**12).to_s(36).rjust(12,"0")
     self.order_number = @order_number
+  end
+
+  def create_order(influencer)
+    @influencer_id = Influencer.find(influencer.id)
+    order = Order.new(influencer_id: @influencer_id)
+    order.order_number
   end
 
 end

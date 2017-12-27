@@ -22,7 +22,7 @@ ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.
 get '/orders/new/3-item' do
   # if CSV document has already been processed
   if Influencer.count != 0
-    erb :'monthly_orders/new3'
+    erb :'orders/new3'
   else
     redirect '/uploads/new'
   end
@@ -31,14 +31,13 @@ end
 get '/orders/new/5-item' do
   # if CSV document has already been processed
   if Influencer.count != 0
-    erb :'monthly_orders/new5'
+    erb :'orders/new5'
   else
     redirect '/uploads/new'
   end
 end
 
 get '/orders/:id' do
-  # @monthly_order = MonthlyOrder.find(params[:id])
 
   items = {
     leggings: 'Leggings',
@@ -50,7 +49,7 @@ get '/orders/:id' do
 
   monthly_order_items = []
 
-  specific_items = ShopifyAPI::Product.where(collection_id: @monthly_order.master_prod_id)
+  specific_items = ShopifyAPI::Product.where(collection_id: @order.master_prod_id)
 
   puts "|||||||||"
   puts "SPECIFIC ITEMS:"
@@ -71,7 +70,7 @@ post '/orders' do
   master_prod = ShopifyAPI::Product.where(title: master_prod_name, id: master_prod_id)
 
 
-  @monthly_order = MonthlyOrder.create(params[:monthly_order])
+  @order = MonthlyOrder.create(params[:monthly_order])
 
   redirect "/orders/#{@order.id}"
 end

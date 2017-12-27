@@ -1,7 +1,7 @@
 class ItemProperty < ActiveRecord::Base
-  validates :name
-  validates :value
-  validates :line_item_id
 
-  belongs to :line_item
+  validates :line_item_id, presence: true
+
+  belongs_to :line_item
+
 end
