@@ -13,36 +13,6 @@ base = ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.mys
 
 get '/uploads/new' do
   p "*****"
-
-  product = ShopifyAPI::Product.where(title: "Sleet Legging October")
-    product.each do |product|
-      # p product
-      # p product.id
-      p "______________"
-    end
-
-  product2 = ShopifyAPI::Product.where(title:  "Wanderlust")
-  product2.each do |prod|
-    p prod.id
-  end
-
-  mystuff = ShopifyAPI::Metafield.all(params: {resource: 'variants', resource_id: 5163971444768, fields: 'key, value'})
-
-  p mystuff
-  # variant_meta_test = ShopifyAPI::Variant.find(27320650437)
-  #
-  # # all_metafields = variant_meta_test.metafields
-  # p variant_meta_test
-  # all_metafields.each do |mymeta|
-  #   puts "#{mymeta.key}, #{mymeta.value}"
-  #   if mymeta.key == 'Discontinued'
-  #     puts "Found Discountinued" #below changes value mymeta.value = 'false' mymeta.save
-  #   end
-  # end
-
-  # p variant_meta_test
-  # collect = ShopifyAPI::Collect.find(:all, :params => { :collection_id => my_collect_id, :limit => 250, :page => collect_page })
-  # p collect
   erb :'uploads/new'
 end
 

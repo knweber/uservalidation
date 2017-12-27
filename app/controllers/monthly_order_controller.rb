@@ -66,18 +66,11 @@ get '/monthly_orders/:id' do
 end
 
 post '/monthly_orders' do
-  master_product = ShopifyAPI::Product.where(id: '409383338016')
+  master_prod_id = params[:monthly_order][:master_prod_id]
+  master_prod_name = params[:monthly_order][:master_prod_name]
 
-  puts master_product
+  master_prod = ShopifyAPI::Product.where(title: master_prod_name, id: master_prod_id)
 
-  # my_url = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
-  # my_addon = "/products/409383338016.json"
-
-  # total_url = my_url + my_addon
-  # puts total_url
-  # response = RestClient.get(total_url)
-  # puts "********************"
-  # puts response
 
   @monthly_order = MonthlyOrder.create(params[:monthly_order])
 
