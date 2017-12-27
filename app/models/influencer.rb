@@ -10,6 +10,6 @@ class Influencer < ActiveRecord::Base
   validates :sports_jacket_size, presence: true
   validates :three_item, presence: true
 
-  has_many :influencer_orders
-  # has_many :tickets, through: :influencer_orders
+  has_many :orders
+
 end

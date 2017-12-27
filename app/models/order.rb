@@ -1,7 +1,7 @@
 require 'securerandom'
 require 'csv'
 
-class InfluencerOrder < ActiveRecord::Base
+class Order < ActiveRecord::Base
 
   validates :influencer_id, presence:true
 
