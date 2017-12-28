@@ -10,15 +10,16 @@ class Order < ActiveRecord::Base
 
   has_many :line_items
 
-  def order_number
+  def self.order_number
     @order_number ||= "#IN" + SecureRandom.random_number(36**12).to_s(36).rjust(12,"0")
-    self.order_number = @order_number
   end
 
-  def create_order(influencer)
-    @influencer_id = Influencer.find(influencer.id)
-    order = Order.new(influencer_id: @influencer_id)
-    order.order_number
+  def create_order(influencer,items,collection_id)
+    order = Order.new(influencer_id: influencer.id)
+    order[:order_number] = Order.order_number
+    order[:collection_id] = collection_id
+
+    sizes = [influencer.bra_size, influencer.top_size, influencer.bottom_size, influencer.sports_jacket_size]
   end
 
 end

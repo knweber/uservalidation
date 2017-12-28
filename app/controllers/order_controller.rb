@@ -38,42 +38,31 @@ get '/orders/new/5-item' do
 end
 
 get '/orders/:id' do
-
-  items = {
-    leggings: 'Leggings',
-    sports_bra: 'Sports Bra',
-    sports_jacket: 'Jacket',
-    top: 'Top',
-    wrap: 'Wrap'
-  }
-
-  monthly_order_items = []
-
-  specific_items = ShopifyAPI::Product.where(collection_id: @order.master_prod_id)
-
-  puts "|||||||||"
-  puts "SPECIFIC ITEMS:"
-  puts specific_items
-
-  # @monthly_order.attributes.each do |attr_name, attr_value|
-  #   if attr_value == true && items[attr_name]
-  #     monthly_order_items.push(items[attr_name])
-  #   end
-  # end
+  # HANDLE THIS
   erb :'orders/show', locals: { order_items: specific_items }
 end
 
 post '/orders' do
-  order_params = params[:order]
+  collection_id = order[:collection_id]
+  collection = ShopifyAPI::CustomCollection.find(collection_id)
+  puts "Chosen collection below:"
+  puts collection
+
+  selection = []
+  params[:order].each do |item|
+    if item.value
+      selection.push(item)
+    end
+  end
+  selection.shift  # removes collection_id
+
+  puts "Selected Items for Order:"
+  puts selection
+
   Influencer.all.each do |user|
-    order_params[:influencer_id] = user.id
-    order = Order.new(order_params)
+    new_order = create_order(user,selection,collection_id)
+    # STUFF HERE
   end
 
   redirect '/tickets/new'
-
-
-  # master_prod = ShopifyAPI::Product.where(title: master_prod_name, id: master_prod_id)
-
-  # redirect "/orders/#{@order.id}"
 end
