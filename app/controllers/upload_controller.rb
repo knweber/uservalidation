@@ -1,8 +1,10 @@
 require 'sinatra'
 require 'httparty'
 require 'shopify_api'
+require_relative '../helpers/validation_helper'
 
 enable :sessions
+include ValidationHelpers
 
 $apikey = ENV['ELLIE_STAGING_API_KEY']
 $password = ENV['ELLIE_STAGING_PASSWORD']
@@ -11,8 +13,20 @@ $shopname = ENV['SHOPNAME']
 base = ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
 get '/uploads/new' do
-  p "*****"
 
+  collection_items = {}
+  addon = "/products.json?collection_id=19622330400"
+  total = base + addon
+  products = HTTParty.get(total)
+  puts "Collection Items:"
+  products["products"].each do |prod|
+    puts "  "
+    collection_items[prod["product_type"]] = [prod["title"],prod["id"]]
+    puts "       " + prod["title"] + ", " + prod["product_type"]
+  end
+  puts "***********"
+  puts collection_items
+  # puts "***********"
   # collection_id = 386209925
 
   # collection = ShopifyAPI::Collect.find(:all, :params => {:collection_id => collection_id})
@@ -33,13 +47,8 @@ get '/uploads/new' do
   #   end
   # end
 
-  prod = ShopifyAPI::Metafield.first.product_collection
-
-  p prod
-
   # (params: {resource: 'variants', resource_id: 5163866357792, fields: 'key,value'})
   # p prod
-  p "___________"
 
   # my_url = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
   # my_addon = "/products/409385271328/metafields.json"
