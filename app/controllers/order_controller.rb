@@ -35,7 +35,7 @@ post '/orders' do
   collection = ShopifyAPI::CustomCollection.find(collection_id)
   puts "Chosen collection below:"
   puts collection
-
+  
   selection = []
   params[:order].each do |item|
       selection.push(item)

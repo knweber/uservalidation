@@ -1,5 +1,9 @@
 require 'csv'
 
+get '/tickets/new' do
+  erb :'tickets/new'
+end
+
 post '/tickets' do
   @ticket = Ticket.create
 
@@ -10,6 +14,8 @@ post '/tickets' do
   end
 
   monthly_csv = create_csv_file(@ticket.id)
+
+  # download output CSV
   content_type('application/csv')
   attachment(monthly_csv)
 end
