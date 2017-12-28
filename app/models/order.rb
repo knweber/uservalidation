@@ -20,6 +20,7 @@ class Order < ActiveRecord::Base
     order[:collection_id] = collection_id
 
     sizes = [influencer.bra_size, influencer.top_size, influencer.bottom_size, influencer.sports_jacket_size]
+    # STUFF HERE
   end
 
 end

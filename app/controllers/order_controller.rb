@@ -7,18 +7,6 @@ $shopname = ENV['SHOPNAME']
 
 ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
-# get '/monthly_orders' do
-  # my_url = "https://#{apikey}:#{password}@#{shopname}.myshopify.com/admin"
-  # my_addon = "/metafields.json?namespace=ellie_order_info"
-  #
-  # total_url = my_url + my_addon
-  # puts total_url
-  # response = HTTParty.get(total_url)
-  # puts response
-
-#   erb :'monthly_orders/index'
-# end
-
 get '/orders/new/3-item' do
   # if CSV document has already been processed
   if Influencer.count != 0
@@ -50,9 +38,7 @@ post '/orders' do
 
   selection = []
   params[:order].each do |item|
-    if item.value
       selection.push(item)
-    end
   end
   selection.shift  # removes collection_id
 
