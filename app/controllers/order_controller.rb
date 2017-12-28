@@ -9,6 +9,8 @@ $shopname = ENV['SHOPNAME']
 
 base_url = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
+ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+
 
 get '/orders/new' do
   # if Influencers have already been created from CSV
@@ -57,21 +59,25 @@ post '/orders' do
   end
 
   selected_items = []
-  params.each do |item|
-    if collection_items[item]
+  params[:order].keys.each do |item|
+    if item != "collection_id"
       selected_items.push([item, collection_items[item]])
     end
   end
-
+  puts "  "
+  puts "*************"
+  puts " "
   puts "Selected Items for Order:"
-  puts selected_items
+  p selected_items
+  puts "__________"
+
+
 
   new_ticket = Ticket.create
 
   Influencer.all.each do |user|
     @order = Order.new({
       collection_id: collection_id,
-      order_number: Order.order_number, # unique order ID per influencer
       influencer_id: user.id,
       ticket_id: new_ticket.id
     })
@@ -84,19 +90,31 @@ post '/orders' do
       jacket_size = user.sports_jacket_size
 
       selected_items.each do |item|
-        prod_type = item[0]
-        prod_title = item[1][0]
-        prod_id = item[1][1]
+        prod_type = item[0][0]
+        prod_title = item[0][1][0]
+        prod_id = item[0][1][1]
 
-        variants_addon = "/products/#{prod_id}/variants.json"
+        var_test = ShopifyAPI::Variant.search(product_id: prod_id)
 
-        total = base_url + variants_addon
-        prod_variants = HTTParty.get(total)
+        # variants_addon = "/products/" + prod_id.to_s + "/variants.json"
+        #
+        # total = base_url + variants_addon
+        # prod_variants = HTTParty.get(total)
+        puts "   "
+        puts "    "
+        puts "   "
+        puts "_______"
+        puts "_______"
+        puts "PRODUCT VARIANTS:"
+        puts "      "
+        puts var_test.as_json
+        puts "    "
+        puts "   "
 
         var_id = ""
         var_sku = ""
 
-        prod_variants.each do |var|
+        var_test.each do |var|
           var_size = var["title"] # XS,S,M,L,XL
           if prod_type == "Leggings"
             if var_size == leggings_size
@@ -108,7 +126,7 @@ post '/orders' do
               var_id = var["id"]
               var_sku = var["sku"]
             end
-          elsif prod_type = "Jacket"
+          elsif prod_type == "Jacket"
             if var_size == jacket_size
               var_id = var["id"]
               var_sku = var["sku"]
@@ -146,13 +164,13 @@ post '/orders' do
           item_for_influencer_order.save
         else
           puts "Creation of line item for order #{@order.id} failed!"
-          erb :'orders/new'
+          redirect '/orders/new'
         end
       end
     else
       puts "Invalid order: #{@order}"
-      erb :'orders/new'
+      redirect '/orders/new'
     end
   end
-  redirect '/tickets/new'
+  redirect "/tickets/#{new_ticket.id}"
 end
