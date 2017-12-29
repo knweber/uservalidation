@@ -1,9 +1,7 @@
 require 'spec_helper'
 
-describe "ValidationHelpers" do
+xdescribe "ValidationHelpers" do
   include ValidationHelpers
-
-  Influencer.destroy_all
 
   email1 = "example@gmail.com"
   email2 = "june@gmail.comm"
@@ -13,22 +11,19 @@ describe "ValidationHelpers" do
   email6 = "dolphin@hotmail.com"
   email7 = "bob@joe.com"
 
-  @influencer1 = FactoryBot.create(:influencer, email: email1)
-  @influencer2 = FactoryBot.create(:influencer, email: email2)
-  @influencer3 = FactoryBot.create(:influencer, email: email3)
-  @influencer4 = FactoryBot.create(:influencer, email: email4)
-  @influencer5 = FactoryBot.create(:influencer, email: email5)
-  @influencer6 = FactoryBot.create(:influencer, email: email6)
-  @influencer7 = FactoryBot.create(:influencer, email: email7)
+  @influencer1 = FactoryBot.build(:influencer, email: email1)
+  @influencer2 = FactoryBot.build(:influencer, email: email2)
+  @influencer3 = FactoryBot.build(:influencer, email: email3)
+  @influencer4 = FactoryBot.build(:influencer, email: email4)
+  @influencer5 = FactoryBot.build(:influencer, email: email5)
+  @influencer6 = FactoryBot.build(:influencer, email: email6)
+  @influencer7 = FactoryBot.build(:influencer, email: email7)
 
   @inval_users = Influencer.all.to_s
 
 
   @val_user = [@influencer6, @influencer7]
 
-  p @inval_users
-
-  p @val_user
   # File.open('sample.csv','a+') do |file|
   #   @users.each do |user|
   #     file.write(user)

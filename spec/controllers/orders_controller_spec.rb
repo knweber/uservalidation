@@ -13,7 +13,7 @@ xdescribe 'Order Controller' do
 
       it 'should display a form' do
         get '/orders/new'
-        expect(last_response.body).to include('<form id=\'monthly-3-order-form\'')
+        expect(last_response.body).to include("<form class=\"order-form field\"")
       end
 
     end

@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'factory_bot'
 
 describe Order, type: :model do
+
   context 'validations' do
     it { is_expected.to validate_presence_of(:influencer_id) }
   end
