@@ -7,14 +7,16 @@
       <p class="errors"> <%= msg %> </p>
     <% end %>
   </div>
-  <p>
-    <% @invalids.split("\n").each do |record| %>
-      <p>
-        <%= record %>
-      </p>
-    <% end %>
-  </p>
-  <hr>
+  <% if @invalids %>
+    <p>
+      <% @invalids.split("\n").each do |record| %>
+        <p>
+          <%= record %>
+        </p>
+      <% end %>
+    </p>
+    <hr>
+  <% end %>
 <% end %>
 
 <form id="upload-form" action="/uploads" enctype="multipart/form-data" method="post">
