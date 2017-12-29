@@ -1,6 +1,8 @@
 require 'sinatra'
+require_relative '../helpers/validation_helper'
 
 enable :sessions
+include ValidationHelpers
 
 get '/uploads/new' do
   erb :'uploads/new'

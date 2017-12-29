@@ -5,13 +5,13 @@ require_relative '../../app/models/ticket.rb'
 
 describe Ticket, type: :model do
 
-    @influencer1 = FactoryBot.create(:influencer)
-    @influencer2 = FactoryBot.create(:influencer)
-
-    @ticket1 = FactoryBot.build(:ticket)
-    p @ticket1.filename
-
-    @influencer_order1 = FactoryBot.build(:influencer_order, influencer_id: @influencer1.id, ticket_id: @ticket1.id)
+    # @influencer1 = FactoryBot.create(:influencer)
+    # @influencer2 = FactoryBot.create(:influencer)
+    #
+    # @ticket1 = FactoryBot.build(:ticket)
+    # p @ticket1.filename
+    #
+    # @influencer_order1 = FactoryBot.build(:influencer_order, influencer_id: @influencer1.id, ticket_id: @ticket1.id)
 
     # influencer_order1.influencer_id = influencer1.id
     # influencer_order1.ticket_id = ticket1.id

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-xdescribe 'MonthlyOrder Controller' do
+xdescribe 'Order Controller' do
 
   context 'get /monthly_orders/new/3-item route' do
 

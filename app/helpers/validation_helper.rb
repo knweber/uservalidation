@@ -2,9 +2,7 @@ require 'date'
 require 'csv'
 require 'email_validator'
 
-helpers do
-
-
+module ValidationHelpers
 
 # Checks all user info, writes invalid users to
 # invalid_emails.txt and creates new influencers in DB for valid users
