@@ -1,3 +1,5 @@
+# Move to Order Controller spec
+
 require 'spec_helper'
 
 describe "ItemSearchHelpers" do

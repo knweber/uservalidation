@@ -181,75 +181,75 @@ post '/orders' do
       ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
       selected_items.each do |item|
-          prod_type = item[0]
-          prod_title = item[1][0]
-          prod_id = item[1][1]
+        prod_type = item[0]
+        prod_title = item[1][0]
+        prod_id = item[1][1]
 
-          p "*************"
-          p "CURRENT ITEM:"
-          p item
+        p "*************"
+        p "CURRENT ITEM:"
+        p item
 
-          var_for_prod = ShopifyAPI::Variant.where(product_id: prod_id)
+        var_for_prod = ShopifyAPI::Variant.where(product_id: prod_id)
 
-          # product variants
-          var_for_prod = var_for_prod.as_json
+        # product variants
+        var_for_prod = var_for_prod.as_json
 
-          var_id = ""
-          var_sku = ""
+        var_id = ""
+        var_sku = ""
 
-          var_for_prod.each do |var|
-            var_size = var["title"] # XS,S,M,L,XL
-            if prod_type == "Leggings"
-              if var_size == leggings_size
-                var_id = var["id"]
-                var_sku = var["sku"]
-              end
-            elsif prod_type == "Sports Bra"
-              if var_size == bra_size
-                var_id = var["id"]
-                var_sku = var["sku"]
-              end
-            elsif prod_type == "Jacket"
-              if var_size == jacket_size
-                var_id = var["id"]
-                var_sku = var["sku"]
-              end
-            elsif prod_type == "Tops"
-              if var_size == top_size
-                var_id = var["id"]
-                var_sku = var["sku"]
-              end
-            elsif prod_type == "Wrap"
-              if var_size == "ONE SIZE"
-                var_id = var["id"]
-                var_sku = var["sku"]
-              end
+        var_for_prod.each do |var|
+          var_size = var["title"] # XS,S,M,L,XL
+          if prod_type == "Leggings"
+            if var_size == leggings_size
+              var_id = var["id"]
+              var_sku = var["sku"]
+            end
+          elsif prod_type == "Sports Bra"
+            if var_size == bra_size
+              var_id = var["id"]
+              var_sku = var["sku"]
+            end
+          elsif prod_type == "Jacket"
+            if var_size == jacket_size
+              var_id = var["id"]
+              var_sku = var["sku"]
+            end
+          elsif prod_type == "Tops"
+            if var_size == top_size
+              var_id = var["id"]
+              var_sku = var["sku"]
+            end
+          elsif prod_type == "Wrap"
+            if var_size == "ONE SIZE"
+              var_id = var["id"]
+              var_sku = var["sku"]
             end
           end
+        end
 
-          price_addon = "/variants/#{var_id}.json"
+        price_addon = "/variants/#{var_id}.json"
 
-          total = base_url + price_addon
-          price_response = HTTParty.get(total)
-          var_price = price_response["variant"]["price"]
+        total = base_url + price_addon
+        price_response = HTTParty.get(total)
+        var_price = price_response["variant"]["price"]
 
-          item_for_influencer_order = LineItem.new({
-            product_type: prod_type,
-            title: prod_title,
-            variant_id: var_id,
-            product_id: prod_id,
-            sku: var_sku,
-            price: var_price,
-            order_id: order.id
-          })
+        item_for_influencer_order = LineItem.new({
+          product_type: prod_type,
+          title: prod_title,
+          variant_id: var_id,
+          product_id: prod_id,
+          sku: var_sku,
+          price: var_price,
+          order_id: order.id
+        })
 
-          if item_for_influencer_order.valid?
-            item_for_influencer_order.save
-          else
-            status 422
-            p "Creation of line item failed"
-            return erb :"uploads/new"
-          end
+        if item_for_influencer_order.valid?
+          item_for_influencer_order.save
+        else
+          status 422
+          p "Creation of line item failed"
+          return erb :"uploads/new"
+        end
       end
     end
   end

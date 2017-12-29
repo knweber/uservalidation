@@ -7,9 +7,6 @@ xdescribe 'Ticket Controller' do
     it 'responds successfully to the /tickets/:id route' do
     end
 
-    it 'renders the ticket#show page' do
-    end
-
   end
 
   context 'post /tickets' do
