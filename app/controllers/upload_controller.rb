@@ -1,22 +1,10 @@
 require 'sinatra'
-require 'httparty'
-require 'shopify_api'
 require_relative '../helpers/validation_helper'
 
 enable :sessions
 include ValidationHelpers
 
-# $apikey = ENV['ELLIE_STAGING_API_KEY']
-# $password = ENV['ELLIE_STAGING_PASSWORD']
-# $shopname = ENV['SHOPNAME']
-
-# base = ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
-
 get '/uploads/new' do
-  # collection_id=19622330400
-
-  # master_product = ShopifyAPI::Product.where(title: "Power Moves - 3 Item", id: 409385271328, fields: 'variants')
-
   erb :'uploads/new'
 end
 

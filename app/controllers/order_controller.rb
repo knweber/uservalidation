@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'shopify_api'
 require 'httparty'
+require 'csv'
+require_relative '../models/ticket'
 
 
 $apikey = ENV['ELLIE_STAGING_API_KEY']
@@ -10,6 +12,111 @@ $shopname = ENV['SHOPNAME']
 base_url = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
 ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
+
+def create_csv_file(ticket_id)
+
+  header_arr = ["order_number","groupon_number","order_date","merchant_sku_item","quantity_requested","shipment_method_requested","shipment_address_name","shipment_address_street","shipment_address_street_2","shipment_address_city","shipment_address_state","shipment_address_postal_code","shipment_address_country","gift","gift_message","quantity_shipped","shipment_carrier","shipment_method","shipment_tracking_number","ship_date","groupon_sku","custom_field_value","permalink","item_name","vendor_id","salesforce_deal_option_id","groupon_cost","billing_address_name","billing_address_street","billing_address_city","billing_address_state","billing_address_postal_code","billing_address_country","purchase_order_number","product_weight","product_weight_unit","product_length","product_width","product_height","product_dimension_unit","customer_phone","incoterms","hts_code","3pl_name","3pl_warehouse_location","kitting_details","sell_price","deal_opportunity_id","shipment_strategy","fulfillment_method","country_of_origin","merchant_permalink","feature_start_date","feature_end_date","bom_sku","payment_method","color_code","tax_rate","tax_price\n"]
+
+  @ticket = Ticket.find(ticket_id)
+  @orders = @ticket.orders
+
+  p "ALL ORDERS:"
+  p @orders
+
+  CSV.open(@ticket.filename,'w') do |file|
+    file << header_arr
+    @orders.each do |order|
+
+      influencer_id = order.influencer_id
+      influencer = Influencer.find(influencer_id)
+
+      p "CURRENT ORDER:"
+      p order
+      p "Influencer ID:"
+      p order.influencer_id
+      p "    "
+
+
+      order.line_items.as_json.each do |item|
+        p "Current line item:"
+        p item
+
+        data_out = [
+          order.order_number,
+          "",
+          "",
+          item["sku"],
+          1,
+          "",
+          order.influencer.first_name + " " + order.influencer.last_name,
+          order.influencer.address1,
+          order.influencer.address2,
+          order.influencer.city,
+          order.influencer.state,
+          order.influencer.zip,
+          "US",
+          "FALSE",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          item["title"],
+          "",
+          "",
+          "",
+          order.influencer.first_name + " " + order.influencer.last_name,
+          order.influencer.address1,
+          order.influencer.city,
+          order.influencer.state,
+          order.influencer.zip,
+          "US",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          order.influencer.phone,
+          "",
+          "",
+          "",
+          "",
+          "",
+          0.00,
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          " \n"
+        ]
+        puts "    "
+        puts "    "
+        puts "    "
+        p "DATA OUT:"
+        p data_out
+        file << data_out
+      end
+    end
+    puts "   "
+    p "FILE:"
+    p file
+  end
+end
+
+
+
 
 
 get '/orders/new' do
@@ -29,6 +136,8 @@ end
 
 
 post '/orders' do
+
+  # sample collection id for testing --> 19622330400
 
   collection_id = params[:order][:collection_id]
 
@@ -71,9 +180,9 @@ post '/orders' do
   p selected_items
   puts "__________"
 
-
-
   new_ticket = Ticket.create
+
+  puts "Ticket filename is " + new_ticket.filename
 
   Influencer.all.each do |user|
     @order = Order.new({
@@ -98,18 +207,15 @@ post '/orders' do
         prod_title = item[1][0]
         prod_id = item[1][1]
 
-        var_test = ShopifyAPI::Variant.where(product_id: prod_id)   # TEST THIS WHEN I GET BACK
+        var_for_prod = ShopifyAPI::Variant.where(product_id: prod_id)   # TEST THIS WHEN I GET BACK
 
         # product variants
-        var_test = var_test.as_json
+        var_for_prod = var_for_prod.as_json
 
         var_id = ""
         var_sku = ""
 
-        var_test.each do |var|
-          puts "|||||||||||||||||"
-          p var
-          puts "|||||||||||||||||"
+        var_for_prod.each do |var|
           var_size = var["title"] # XS,S,M,L,XL
           if prod_type == "Leggings"
             if var_size == leggings_size
@@ -167,5 +273,13 @@ post '/orders' do
       redirect '/orders/new'
     end
   end
+
+  # download output CSV
+
+  filename = new_ticket.filename
+  create_csv_file(new_ticket.id)
+
+  send_file(filename)
+
   redirect "/tickets/#{new_ticket.id}"
 end

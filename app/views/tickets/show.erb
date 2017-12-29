@@ -1,4 +1,4 @@
-<%= ticket.filename %>
+<h3>Filename: </h3> <%= ticket.filename %>
 <br />
 <% influencers.each do |influencer| %>
   <p><%= influencer.first_name %></p>
@@ -19,18 +19,7 @@
 <br />
 <% line_items.each do |item| %>
   <p> <%= item.title %> </p>
-  <p> Blah </p>
   <p> Variant ID: <%= item.variant_id %> </p>
   <p> Order ID: <%= item.order_id %> </p>
   <p> SKU: <%= item.sku %> </p>
 <% end %>
-<%# @orders.each do |order| %>
-  <p>
-    <%#= order.order_number %>
-  </p>
-  <p>
-    <%# item = LineItem.find_by(order_id: order.id) %>
-    <%#= item %>
-  </p>
-  <br />
-<%# end %>
