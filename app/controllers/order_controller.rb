@@ -2,39 +2,33 @@ require 'sinatra'
 require 'shopify_api'
 require 'httparty'
 require 'csv'
-require_relative '../models/ticket'
-
 
 $apikey = ENV['ELLIE_STAGING_API_KEY']
 $password = ENV['ELLIE_STAGING_PASSWORD']
 $shopname = ENV['SHOPNAME']
 
+
 base_url = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
-ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
 def create_csv_file(ticket_id)
 
   header_arr = ["order_number","groupon_number","order_date","merchant_sku_item","quantity_requested","shipment_method_requested","shipment_address_name","shipment_address_street","shipment_address_street_2","shipment_address_city","shipment_address_state","shipment_address_postal_code","shipment_address_country","gift","gift_message","quantity_shipped","shipment_carrier","shipment_method","shipment_tracking_number","ship_date","groupon_sku","custom_field_value","permalink","item_name","vendor_id","salesforce_deal_option_id","groupon_cost","billing_address_name","billing_address_street","billing_address_city","billing_address_state","billing_address_postal_code","billing_address_country","purchase_order_number","product_weight","product_weight_unit","product_length","product_width","product_height","product_dimension_unit","customer_phone","incoterms","hts_code","3pl_name","3pl_warehouse_location","kitting_details","sell_price","deal_opportunity_id","shipment_strategy","fulfillment_method","country_of_origin","merchant_permalink","feature_start_date","feature_end_date","bom_sku","payment_method","color_code","tax_rate","tax_price\n"]
 
-  @ticket = Ticket.find(ticket_id)
-  @orders = @ticket.orders
+  ticket = Ticket.find(ticket_id)
+  orders = ticket.orders
 
-  p "ALL ORDERS:"
-  p @orders
-
-  CSV.open(@ticket.filename,'w') do |file|
+  CSV.open(ticket.filename,'w') do |file|
     file << header_arr
-    @orders.each do |order|
+    orders.each do |order|
 
       influencer_id = order.influencer_id
       influencer = Influencer.find(influencer_id)
 
-      p "CURRENT ORDER:"
+      p "_____ CURRENT ORDER:"
       p order
-      p "Influencer ID:"
+      p "_____ INFLUENCER ID:"
       p order.influencer_id
-      p "    "
 
 
       order.line_items.as_json.each do |item|
@@ -101,17 +95,11 @@ def create_csv_file(ticket_id)
           "",
           " \n"
         ]
-        puts "    "
-        puts "    "
-        puts "    "
         p "DATA OUT:"
         p data_out
         file << data_out
       end
     end
-    puts "   "
-    p "FILE:"
-    p file
   end
 end
 
@@ -128,17 +116,13 @@ get '/orders/new' do
   end
 end
 
-get '/orders/:id' do
-  # HANDLE THIS
-  erb :'orders/show', locals: { order_items: specific_items }
-end
-
-
+# get '/orders/:id' do
+  # NEED TO FINISH THIS
+#   erb :'orders/show'
+# end
 
 post '/orders' do
-
-  # sample collection id for testing --> 19622330400
-
+  # sample collection id for testing --> 19622330400 (August VIP)
   collection_id = params[:order][:collection_id]
 
   collection_addon = "/custom_collections/#{collection_id}.json"
@@ -169,45 +153,43 @@ post '/orders' do
 
   selected_items = []
   params[:order].keys.each do |item|
-    if item != "collection_id"
+    if item != "collection_id" && collection_items[item]
       selected_items.push([item, collection_items[item]])
     end
   end
-  puts "  "
-  puts "*************"
-  puts " "
+  p "*************"
   puts "Selected Items for Order:"
   p selected_items
   puts "__________"
 
   new_ticket = Ticket.create
 
-  puts "Ticket filename is " + new_ticket.filename
-
   Influencer.all.each do |user|
-    @order = Order.new({
+    order = Order.new({
       collection_id: collection_id,
       influencer_id: user.id,
       ticket_id: new_ticket.id
     })
-    if @order.valid?
-      @order.save
+    if order.valid?
+      order.save
 
       bra_size = user.bra_size
       top_size = user.top_size
       leggings_size = user.bottom_size
       jacket_size = user.sports_jacket_size
 
-      p "_____SELECTED ITEMS: ______"
-      p selected_items
-      p "    "
+      ShopifyAPI::Base.site = "https://#{$apikey}:#{$password}@#{$shopname}.myshopify.com/admin"
 
       selected_items.each do |item|
         prod_type = item[0]
         prod_title = item[1][0]
         prod_id = item[1][1]
 
-        var_for_prod = ShopifyAPI::Variant.where(product_id: prod_id)   # TEST THIS WHEN I GET BACK
+        p "*************"
+        p "CURRENT ITEM:"
+        p item
+
+        var_for_prod = ShopifyAPI::Variant.where(product_id: prod_id)
 
         # product variants
         var_for_prod = var_for_prod.as_json
@@ -249,7 +231,7 @@ post '/orders' do
 
         total = base_url + price_addon
         price_response = HTTParty.get(total)
-        var_price = price_response["price"]
+        var_price = price_response["variant"]["price"]
 
         item_for_influencer_order = LineItem.new({
           product_type: prod_type,
@@ -258,28 +240,23 @@ post '/orders' do
           product_id: prod_id,
           sku: var_sku,
           price: var_price,
-          order_id: @order.id
+          order_id: order.id
         })
 
         if item_for_influencer_order.valid?
           item_for_influencer_order.save
         else
-          puts "Creation of line item for order #{@order.id} failed!"
-          redirect '/orders/new'
+          status 422
+          p "Creation of line item failed"
+          return erb :"uploads/new"
         end
       end
-    else
-      puts "Invalid order: #{@order}"
-      redirect '/orders/new'
     end
   end
 
   # download output CSV
-
-  filename = new_ticket.filename
   create_csv_file(new_ticket.id)
-
-  send_file(filename)
+  send_file(new_ticket.filename)
 
   redirect "/tickets/#{new_ticket.id}"
 end

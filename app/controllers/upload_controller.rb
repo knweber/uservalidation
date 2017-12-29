@@ -5,6 +5,9 @@ enable :sessions
 include ValidationHelpers
 
 get '/uploads/new' do
+  if Order.any?
+    Order.destroy_all
+  end
   erb :'uploads/new'
 end
 
