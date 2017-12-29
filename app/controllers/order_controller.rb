@@ -89,32 +89,27 @@ post '/orders' do
       leggings_size = user.bottom_size
       jacket_size = user.sports_jacket_size
 
+      p "_____SELECTED ITEMS: ______"
+      p selected_items
+      p "    "
+
       selected_items.each do |item|
-        prod_type = item[0][0]
-        prod_title = item[0][1][0]
-        prod_id = item[0][1][1]
+        prod_type = item[0]
+        prod_title = item[1][0]
+        prod_id = item[1][1]
 
-        var_test = ShopifyAPI::Variant.search(product_id: prod_id)
+        var_test = ShopifyAPI::Variant.where(product_id: prod_id)   # TEST THIS WHEN I GET BACK
 
-        # variants_addon = "/products/" + prod_id.to_s + "/variants.json"
-        #
-        # total = base_url + variants_addon
-        # prod_variants = HTTParty.get(total)
-        puts "   "
-        puts "    "
-        puts "   "
-        puts "_______"
-        puts "_______"
-        puts "PRODUCT VARIANTS:"
-        puts "      "
-        puts var_test.as_json
-        puts "    "
-        puts "   "
+        # product variants
+        var_test = var_test.as_json
 
         var_id = ""
         var_sku = ""
 
         var_test.each do |var|
+          puts "|||||||||||||||||"
+          p var
+          puts "|||||||||||||||||"
           var_size = var["title"] # XS,S,M,L,XL
           if prod_type == "Leggings"
             if var_size == leggings_size
