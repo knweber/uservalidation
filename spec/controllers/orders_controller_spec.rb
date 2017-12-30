@@ -5,7 +5,7 @@ xdescribe 'Order Controller' do
 
   context 'get /orders/new route' do
 
-    xcontext 'after valid CSV submission' do
+    context 'after valid CSV submission' do
 
       it 'should respond successfully to the /orders/new route' do
         get '/orders/new'
@@ -34,7 +34,7 @@ xdescribe 'Order Controller' do
     end
   end
 
-  xcontext 'post /orders route' do
+  context 'post /orders route' do
 
     it 'should redirect after submission' do
     end
@@ -60,7 +60,7 @@ xdescribe 'Order Controller' do
     it "should create an order belonging to the given influencer" do
     end
 
-    xit 'generates a csv file listing all of the influencers\' orders' do
+    it 'generates a csv file listing all of the influencers\' orders' do
       influencer4 = FactoryBot.create(:influencer)
       ticket4 = FactoryBot.create(:ticket)
       order4 = FactoryBot.create(:order, influencer_id: influencer4.id, ticket_id: ticket4.id)
