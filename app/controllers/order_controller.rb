@@ -15,10 +15,10 @@ def create_csv_file(ticket_id)
 
   header_arr = ["order_number","groupon_number","order_date","merchant_sku_item","quantity_requested","shipment_method_requested","shipment_address_name","shipment_address_street","shipment_address_street_2","shipment_address_city","shipment_address_state","shipment_address_postal_code","shipment_address_country","gift","gift_message","quantity_shipped","shipment_carrier","shipment_method","shipment_tracking_number","ship_date","groupon_sku","custom_field_value","permalink","item_name","vendor_id","salesforce_deal_option_id","groupon_cost","billing_address_name","billing_address_street","billing_address_city","billing_address_state","billing_address_postal_code","billing_address_country","purchase_order_number","product_weight","product_weight_unit","product_length","product_width","product_height","product_dimension_unit","customer_phone","incoterms","hts_code","3pl_name","3pl_warehouse_location","kitting_details","sell_price","deal_opportunity_id","shipment_strategy","fulfillment_method","country_of_origin","merchant_permalink","feature_start_date","feature_end_date","bom_sku","payment_method","color_code","tax_rate","tax_price\n"]
 
-  ticket = Ticket.find(ticket_id)
-  orders = ticket.orders
+  @ticket = Ticket.find(ticket_id)
+  orders = @ticket.orders
 
-  CSV.open(ticket.filename,'w') do |file|
+  CSV.open(@ticket.filename,'w+') do |file|
     file << header_arr
     orders.each do |order|
 
@@ -162,13 +162,13 @@ post '/orders' do
   p selected_items
   puts "__________"
 
-  new_ticket = Ticket.create
+  @new_ticket = Ticket.create
 
   Influencer.all.each do |user|
     order = Order.new({
       collection_id: collection_id,
       influencer_id: user.id,
-      ticket_id: new_ticket.id
+      ticket_id: @new_ticket.id
     })
     if order.valid?
       order.save
@@ -255,8 +255,8 @@ post '/orders' do
   end
 
   # download output CSV
-  create_csv_file(new_ticket.id)
-  send_file(new_ticket.filename)
+  # create_csv_file(@new_ticket.id)
+  # send_file(new_ticket.filename)
 
-  redirect "/tickets/#{new_ticket.id}"
+  redirect "/tickets/#{@new_ticket.id}"
 end
