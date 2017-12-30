@@ -39,6 +39,27 @@ xdescribe 'Order Controller' do
     it 'should redirect after submission' do
     end
 
+    it "should find the product with the given product id" do
+    end
+
+    it "should find the influencer with the given influencer id" do
+    end
+
+    it "should find the product variant for the specific customer" do
+    end
+
+    it "should find the sku of the specific product variant" do
+    end
+
+    it "should create a new order in the database" do
+    end
+
+    it "should create an order belonging to the monthly ticket" do
+    end
+
+    it "should create an order belonging to the given influencer" do
+    end
+
     xit 'generates a csv file listing all of the influencers\' orders' do
       influencer4 = FactoryBot.create(:influencer)
       ticket4 = FactoryBot.create(:ticket)
