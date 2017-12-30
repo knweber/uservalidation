@@ -1,8 +1,14 @@
 require 'spec_helper'
 require 'factory_bot'
+require 'rack/test'
 
 describe "ValidationHelpers" do
   include ValidationHelpers
+  include Rack::Test::Methods
+
+  before(:each) do
+    Influencer.destroy_all
+  end
 
   context '#check_non_english' do
     it 'should replace non-English letters with their English equivalents' do
@@ -14,10 +20,12 @@ describe "ValidationHelpers" do
 
   context '#invalid_emails' do
 
-    xit 'should check the validity of each user\'s email address' do
+    xit 'should not create any influencers if invalid users are found' do
+      expect(Influencer.all.count).to eq(0)
     end
 
-    xit 'should return false if invalid users are found' do
+    xit 'should create influencers if all users are valid' do
+      expect(Influencer.all.count).to eq(4)
     end
 
   end

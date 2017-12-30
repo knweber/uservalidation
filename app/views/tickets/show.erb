@@ -1,27 +1,5 @@
-<!-- used for some testing  -->
-<h1>SUCCESS!!!</h1>
-<h3>Filename: </h3> <%= ticket.filename %>
+<strong><h3>Order Successful</h3></strong>
 <br />
-<% influencers.each do |influencer| %>
-  <p><%= influencer.first_name %></p>
-  <p><%= influencer.id %></p>
-  <br />
-  <% orders = Order.where(influencer_id: influencer.id) %>
-  <% orders.each do |order| %>
-    <p>
-      <%= order.order_number %>
-    </p>
-    <p>
-      <%= order.influencer_id %>
-    </p>
-  <% end %>
-  <hr>
-<% end %>
-
-<br />
-<% line_items.each do |item| %>
-  <p> <%= item.title %> </p>
-  <p> Variant ID: <%= item.variant_id %> </p>
-  <p> Order ID: <%= item.order_id %> </p>
-  <p> SKU: <%= item.sku %> </p>
-<% end %>
+<form action="/tickets/<%= ticket.id %>/download" method="get">
+  <input type="submit" value="Download CSV" />
+</form>

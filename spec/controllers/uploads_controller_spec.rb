@@ -1,6 +1,12 @@
 require 'spec_helper'
+require 'rack/test'
 
 describe 'Upload Controller' do
+  include Rack::Test::Methods
+
+  before(:each) do
+    Influencer.destroy_all
+  end
 
   context 'get /uploads/new route' do
 
@@ -21,25 +27,36 @@ describe 'Upload Controller' do
 
   end
 
-  xcontext 'post /uploads route' do
+  context 'post /uploads route' do
 
     context 'valid CSV entries' do
-      it 'should have a status of 302 after submission' do
+      it 'should have a status of 200 after submission' do
+        post '/uploads', 'file' => Rack::Test::UploadedFile.new('valid_influencers_sample_upload.csv',
+        'application/csv')
+        expect(last_response.status).to eq(200)
       end
 
-      it 'should render uploads#index' do
+      it 'will create users in the database' do
+        post '/uploads', 'file' => Rack::Test::UploadedFile.new('valid_influencers_sample_upload.csv',
+        'application/csv')
+        expect(Influencer.all.count).to eq(4)
       end
     end
 
     context 'invalid CSV entries' do
-      it 'should redirect after submission' do
+      it 'should have a status of 422' do
+        post '/uploads', 'file' => Rack::Test::UploadedFile.new('invalid_influencers_sample_upload.csv',
+        'application/csv')
+        expect(last_response.status).to eq(422)
       end
 
-      it 'should redirect to /uploads/new after submission' do
+      it 'will not create users in the database' do
+        post '/uploads', 'file' => Rack::Test::UploadedFile.new('invalid_influencers_sample_upload.csv',
+        'application/csv')
+        expect(Influencer.all.count).to eq(0)
       end
 
-      it 'should display an error message' do
-      end
+
     end
 
   end
