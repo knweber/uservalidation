@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 
+# Disregard this file for right now -- planning to add the call limit checks here
+
 class App < ActiveRecord::Base
 
   $apikey = ENV['ELLIE_STAGING_API_KEY']

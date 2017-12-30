@@ -14,6 +14,11 @@ describe 'Upload Controller' do
       expect(last_response.body).to include("<form id=\"upload-form\"")
     end
 
+    it 'should erase any existing orders' do
+      get '/uploads/new'
+      expect(Order.count).to eq(0)
+    end
+
   end
 
   xcontext 'post /uploads route' do

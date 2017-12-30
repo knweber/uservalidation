@@ -1,3 +1,5 @@
+require 'faker'
+
 FactoryBot.define do
   factory :influencer do
     first_name { 'Harry' }
