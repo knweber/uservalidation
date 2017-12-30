@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'factory_bot'
 
 xdescribe 'Order Controller' do
 
@@ -36,6 +37,14 @@ xdescribe 'Order Controller' do
   xcontext 'post /orders route' do
 
     it 'should redirect after submission' do
+    end
+
+    xit 'generates a csv file listing all of the influencers\' orders' do
+      influencer4 = FactoryBot.create(:influencer)
+      ticket4 = FactoryBot.create(:ticket)
+      order4 = FactoryBot.create(:order, influencer_id: influencer4.id, ticket_id: ticket4.id)
+      contents = File.open(ticket4.filename)
+      expect(contents).to include('sku')
     end
 
   end
