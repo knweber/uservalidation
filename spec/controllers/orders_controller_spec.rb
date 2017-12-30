@@ -1,18 +1,24 @@
 require 'spec_helper'
 require 'factory_bot'
 
-xdescribe 'Order Controller' do
+describe 'Order Controller' do
+
+  before(:each) do
+    Influencer.destroy_all
+  end
 
   context 'get /orders/new route' do
 
     context 'after valid CSV submission' do
 
       it 'should respond successfully to the /orders/new route' do
+        FactoryBot.create(:influencer)
         get '/orders/new'
         expect(last_response.status).to eq(200)
       end
 
-      it 'should display a form' do
+      it 'should display an order form' do
+        FactoryBot.create(:influencer)
         get '/orders/new'
         expect(last_response.body).to include("<form class=\"order-form field\"")
       end
@@ -26,15 +32,14 @@ xdescribe 'Order Controller' do
         expect(last_response.status).to eq(302)
       end
 
-      it 'should redirect to /uploads/new' do
+      it 'should redirect to uploads/new' do
         get '/orders/new'
         expect(last_response.location).to include('/uploads/new')
       end
-
     end
   end
 
-  context 'post /orders route' do
+  xcontext 'post /orders route' do
 
     it 'should redirect after submission' do
     end
