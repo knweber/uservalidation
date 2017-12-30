@@ -63,7 +63,7 @@ module ValidationHelpers
     user[1] = check_non_english(user[1])
 
     if !Influencer.find_by(email: email)
-      influencer = Influencer.create(
+      influencer = Influencer.new(
         first_name: user[0],
         last_name: user[1],
         address1: user[2],
@@ -79,11 +79,14 @@ module ValidationHelpers
         sports_jacket_size: user[12],
         three_item: user[13])
 
-      puts "Influencer created!"
-      puts "#{influencer.first_name} #{influencer.last_name},\nID: #{influencer.id},\nEmail: #{influencer.email},\nThree-item: #{influencer.three_item}"
+      if influencer.valid?
+        influencer.save
+
+        puts "Influencer created!"
+        puts "#{influencer.first_name} #{influencer.last_name},\nID: #{influencer.id},\nEmail: #{influencer.email},\nThree-item: #{influencer.three_item}"
+
+      end
     end
-
-
   end
 
 end
